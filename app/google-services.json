@@ -1,0 +1,68 @@
+{
+  "project_info": {
+    "project_number": "823896101090",
+    "project_id": "billingappdemo-56a9a",
+    "storage_bucket": "billingappdemo-56a9a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:823896101090:android:2b1e5717d71b87a70ccebb",
+        "android_client_info": {
+          "package_name": "com.example.billingappdemo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "823896101090-u43vbhskpq1s4imuq7kurp73pbp41s2g.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB8-eYf4F6aduilufFgRBfZPQnwQST4yuw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "823896101090-u43vbhskpq1s4imuq7kurp73pbp41s2g.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:823896101090:android:c830143d6406faa70ccebb",
+        "android_client_info": {
+          "package_name": "com.example.medicologinsignup"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "823896101090-u43vbhskpq1s4imuq7kurp73pbp41s2g.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB8-eYf4F6aduilufFgRBfZPQnwQST4yuw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "823896101090-u43vbhskpq1s4imuq7kurp73pbp41s2g.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

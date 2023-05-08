@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">BillingDemo</string>
+    <string name="login">Login</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="register">Register</string>
+    <string name="click_to_login">Click to login</string>
+    <string name="click_to_register">Click to register</string>
+    <string name="logout">Logout</string>
+    <string name="hello">hello</string>
+    <string name="sales">Sales</string>
+    <string name="loan">Loan</string>
+    <string name="salesreport">SalesReport</string>
+    <string name="sales_report">Sales Report</string>
+    <string name="search">Search</string>
+</resources>
