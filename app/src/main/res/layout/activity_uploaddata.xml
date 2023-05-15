@@ -1,0 +1,415 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#b0f7f1"
+    tools:context=".uploaddata">
+
+
+    <!--    <EditText-->
+    <!--        android:id="@+id/dorc"-->
+    <!--        android:layout_width="124dp"-->
+    <!--        android:layout_height="45dp"-->
+    <!--        android:layout_marginTop="376dp"-->
+    <!--        android:layout_weight="1"-->
+    <!--        android:background="@drawable/rounded_edittext"-->
+    <!--        android:ems="10"-->
+    <!--        android:fontFamily="@font/poppins_light"-->
+    <!--        android:inputType="text"-->
+    <!--        android:maxHeight="50px"-->
+    <!--        android:text=""-->
+    <!--        android:padding="10dp"-->
+    <!--        android:textColor="#FFE8D6"-->
+    <!--        app:layout_constraintHeight_default="wrap"-->
+    <!--        app:layout_constraintHorizontal_bias="0.714"-->
+    <!--        app:layout_constraintLeft_toLeftOf="parent"-->
+    <!--        app:layout_constraintRight_toRightOf="parent"-->
+    <!--        app:layout_constraintTop_toTopOf="parent"-->
+    <!--        tools:ignore="MissingConstraints" />-->
+
+
+    <TextView
+        android:layout_width="161dp"
+        android:layout_height="54dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="37dp"
+        android:layout_marginEnd="119dp"
+
+        android:text="Sales Details"
+        android:textColor="#CB997E"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.444"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.076" />
+
+    <TextView
+        android:id="@+id/Date"
+        android:layout_width="259dp"
+        android:layout_height="48dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="125dp"
+        android:layout_marginEnd="70dp"
+        android:layout_weight="1"
+        android:background="@drawable/rounded_button"
+        android:drawableLeft="@drawable/ic_baseline_calendar_today_24"
+        android:drawablePadding="20dp"
+        android:ems="10"
+
+        android:hint="Select Date"
+        android:padding="10dp"
+        android:textColor="#FFE8D6"
+        android:textColorHint="#8CFFFFFF"
+        android:textSize="20sp"
+        app:layout_constraintHeight_default="wrap"
+        app:layout_constraintHorizontal_bias="0.348"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="101dp"
+        tools:layout_editor_absoluteY="172dp" />
+
+    <EditText
+        android:id="@+id/billno"
+        android:layout_width="259dp"
+        android:layout_height="48dp"
+        android:layout_below="@+id/Date"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="41dp"
+        android:layout_marginEnd="72dp"
+        android:layout_weight="1"
+        android:background="@drawable/rounded_button"
+        android:ems="10"
+
+        android:hint="Bill No."
+        android:inputType="text"
+        android:maxHeight="50px"
+        android:padding="10dp"
+        android:text=""
+        android:textColor="#FFE8D6"
+        android:textColorHint="#8CFFFFFF"
+        app:layout_constraintHeight_default="wrap"
+        app:layout_constraintHorizontal_bias="0.348"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints" />
+
+
+    <!--    <EditText-->
+    <!--        android:id="@+id/cred"-->
+    <!--        android:layout_width="124dp"-->
+    <!--        android:layout_height="45dp"-->
+    <!--        android:layout_below="@+id/description"-->
+    <!--        android:layout_alignParentEnd="true"-->
+    <!--        android:layout_marginLeft="50dp"-->
+    <!--        android:layout_marginTop="41dp"-->
+    <!--        android:layout_marginEnd="72dp"-->
+    <!--        android:layout_weight="1"-->
+    <!--        android:hint="Credited"-->
+    <!--        android:textColorHint="#8CFFFFFF"-->
+    <!--        android:background="@drawable/rounded_edittext"-->
+    <!--        android:ems="10"-->
+    <!--        android:fontFamily="@font/poppins_light"-->
+    <!--        android:inputType="number"-->
+    <!--        android:maxHeight="50px"-->
+    <!--        android:padding="10dp"-->
+    <!--        android:text=""-->
+    <!--        android:textColor="#FFE8D6"-->
+    <!--        app:layout_constraintHeight_default="wrap"-->
+    <!--        app:layout_constraintHorizontal_bias="0.714"-->
+    <!--        app:layout_constraintLeft_toLeftOf="parent"-->
+    <!--        app:layout_constraintRight_toRightOf="parent"-->
+    <!--        app:layout_constraintTop_toTopOf="parent"-->
+    <!--        tools:ignore="MissingConstraints" />-->
+
+
+    <EditText
+        android:id="@+id/name"
+        android:layout_width="259dp"
+        android:layout_height="48dp"
+        android:layout_below="@+id/billno"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="41dp"
+        android:layout_marginEnd="72dp"
+        android:layout_weight="1"
+        android:background="@drawable/rounded_button"
+        android:ems="10"
+        android:hint=" Name"
+        android:inputType="text"
+        android:maxHeight="50px"
+        android:padding="10dp"
+        android:textColor="#FFE8D6"
+        android:textColorHint="#8CFFFFFF"
+        app:layout_constraintHorizontal_bias="0.348"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints" />
+
+    <EditText
+        android:id="@+id/place"
+        android:layout_width="259dp"
+        android:layout_height="48dp"
+        android:layout_below="@+id/name"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="41dp"
+        android:layout_marginEnd="72dp"
+        android:layout_weight="1"
+        android:background="@drawable/rounded_button"
+        android:hint="Place"
+        android:inputType="text"
+        android:maxHeight="50px"
+        android:padding="10dp"
+        android:textColor="#FFE8D6"
+        android:textColorHint="#8CFFFFFF"
+        app:layout_constraintHorizontal_bias="0.348"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints" />
+
+    <EditText
+        android:id="@+id/amount"
+        android:layout_width="124dp"
+        android:layout_height="45dp"
+        android:layout_below="@+id/place"
+        android:layout_marginTop="41dp"
+        android:layout_marginEnd="8dp"
+        android:layout_toStartOf="@+id/balance"
+        android:layout_weight="1"
+        android:background="@drawable/rounded_button"
+        android:ems="10"
+
+        android:hint="Amount(Rs)"
+        android:inputType="numberDecimal"
+        android:maxHeight="50px"
+        android:padding="10dp"
+        android:textColor="#FFE8D6"
+        android:textColorHint="#8CFFFFFF"
+        app:layout_constraintHeight_default="wrap"
+        app:layout_constraintHorizontal_bias="0.184"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints" />
+
+    <EditText
+        android:id="@+id/balance"
+        android:layout_width="124dp"
+        android:layout_height="45dp"
+        android:layout_below="@+id/place"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="41dp"
+        android:layout_marginEnd="72dp"
+        android:layout_weight="1"
+        android:background="@drawable/rounded_button"
+        android:ems="10"
+
+        android:hint="Balance(Rs)"
+        android:inputType="numberDecimal"
+        android:maxHeight="50px"
+        android:padding="10dp"
+        android:textColor="#FFE8D6"
+        android:textColorHint="#8CFFFFFF"
+        app:layout_constraintHeight_default="wrap"
+        app:layout_constraintHorizontal_bias="0.184"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints" />
+
+
+    <Button
+        android:id="@+id/save"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/balance"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="114dp"
+        android:layout_marginEnd="155dp"
+        android:background="@drawable/rounded_button"
+        android:text="Save"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+
+    <Button
+        android:id="@+id/button1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/save"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="213dp"
+        android:layout_marginBottom="76dp"
+        android:layout_weight="1"
+        android:background="@drawable/rounded_button"
+        android:padding="10dp"
+        android:text="PICK FILE"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toStartOf="@id/button2"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/balance"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="37dp"
+        android:layout_marginEnd="87dp"
+        android:layout_weight="1"
+        android:background="@drawable/rounded_button"
+
+        android:text="SCAN"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/button1"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+</RelativeLayout>
+
+    <!--<?xml version="1.0" encoding="utf-8"?>-->
+<!--<ScrollView-->
+<!--    xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--    xmlns:app="http://schemas.android.com/apk/res-auto"-->
+<!--    xmlns:tools="http://schemas.android.com/tools"-->
+<!--    android:layout_width="match_parent"-->
+<!--    android:layout_height="match_parent"-->
+<!--    android:orientation="vertical"-->
+<!--    tools:context=".uploaddata">-->
+<!--    <androidx.cardview.widget.CardView-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginTop="50dp"-->
+<!--        android:layout_marginEnd="20dp"-->
+<!--        android:layout_marginStart="20dp"-->
+<!--        app:cardCornerRadius="30dp"-->
+<!--        app:cardElevation="20dp">-->
+
+<!--        <RelativeLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="627dp"-->
+<!--            android:layout_gravity="center_horizontal"-->
+<!--            android:orientation="vertical"-->
+<!--            android:padding="20dp">-->
+
+<!--            <TextView-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="Sales Details"-->
+<!--                android:textAlignment="center"-->
+<!--                android:textColor="@color/teal_200"-->
+<!--                android:textSize="30sp" />-->
+
+<!--            <ImageView-->
+<!--                android:id="@+id/uploadImage"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="56dp"-->
+<!--                android:layout_marginTop="10dp"-->
+<!--                android:scaleType="fitXY"-->
+<!--                android:src="@drawable/ic_launcher_background" />-->
+
+
+<!--            <EditText-->
+<!--                android:id="@+id/uploadbillno"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="50dp"-->
+<!--                android:layout_marginTop="20dp"-->
+<!--                android:background="@color/teal_200"-->
+<!--                android:gravity="start|center_vertical"-->
+<!--                android:hint="Bill No."-->
+<!--                android:padding="16dp"-->
+<!--                android:textColor="@color/black" />-->
+
+<!--            <EditText-->
+<!--                android:id="@+id/uploadname"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="50dp"-->
+<!--                android:layout_marginTop="20dp"-->
+<!--                android:background="@color/teal_200"-->
+<!--                android:gravity="start|center_vertical"-->
+<!--                android:hint="Name"-->
+<!--                android:padding="16dp"-->
+<!--                android:textColor="@color/black" />-->
+
+<!--            <EditText-->
+<!--                android:id="@+id/uploadplace"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="50dp"-->
+<!--                android:layout_marginTop="20dp"-->
+<!--                android:background="@color/teal_200"-->
+<!--                android:gravity="start|center_vertical"-->
+<!--                android:hint="Place"-->
+<!--                android:padding="16dp"-->
+<!--                android:textColor="@color/black" />-->
+
+<!--            <EditText-->
+<!--                android:id="@+id/uploadamount"-->
+<!--                android:layout_width="129dp"-->
+<!--                android:layout_height="50dp"-->
+<!--                android:layout_marginTop="20dp"-->
+<!--                android:background="@color/teal_200"-->
+<!--                android:gravity="start|center_vertical"-->
+<!--                android:hint="Amount"-->
+<!--                android:padding="16dp"-->
+<!--                android:textColor="@color/black"-->
+<!--                android:layout_below="@+id/uploadplace"-->
+<!--                app:layout_constraintEnd_toStartOf="@+id/uploadbalance"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:layout_constraintTop_toTopOf="parent"/>-->
+
+<!--            <EditText-->
+<!--                android:id="@+id/uploadbalance"-->
+<!--                android:layout_width="129dp"-->
+<!--                android:layout_height="50dp"-->
+<!--                android:layout_below="@+id/uploadplace"-->
+<!--                android:layout_alignParentEnd="true"-->
+<!--                android:layout_marginTop="20dp"-->
+<!--                android:background="@color/teal_200"-->
+<!--                android:gravity="start|center_vertical"-->
+<!--                android:hint="Balance"-->
+<!--                android:textColor="@color/black"-->
+<!--                app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                app:layout_constraintEnd_toEndOf="parent"-->
+<!--                app:layout_constraintStart_toEndOf="@+id/uploadamount"-->
+<!--                app:layout_constraintStart_toStartOf="parent" />-->
+
+<!--            <EditText-->
+<!--                android:id="@+id/uploaddate"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="50dp"-->
+<!--                android:layout_marginTop="20dp"-->
+<!--                android:background="@color/teal_200"-->
+<!--                android:gravity="start|center_vertical"-->
+<!--                android:hint="Date"-->
+<!--                android:padding="16dp"-->
+<!--                android:textColor="@color/black" />-->
+
+<!--            <Button-->
+<!--                android:id="@+id/saveButton"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="40dp"-->
+<!--                android:layout_marginTop="20dp"-->
+<!--                android:background="@drawable/rounded_button"-->
+<!--                android:text="Save"-->
+<!--                android:textColor="@color/teal_200"-->
+<!--                android:textSize="18sp"-->
+<!--                app:cornerRadius="500dp" />-->
+<!--        </RelativeLayout>-->
+<!--    </androidx.cardview.widget.CardView>-->
+<!--</ScrollView>-->
