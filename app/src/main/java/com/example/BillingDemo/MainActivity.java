@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         switch (v.getId()) {
             case R.id.button1:
                 Toast.makeText(getApplicationContext(), "Sales Page", Toast.LENGTH_SHORT).show();
-                Intent intent=new Intent(getApplicationContext(),uploaddata.class);
+                Intent intent=new Intent(getApplicationContext(),SalesFirstPage.class);
                 startActivity(intent);
                 finish();
                 break;
