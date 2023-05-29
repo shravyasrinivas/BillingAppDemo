@@ -51,7 +51,7 @@ public class uploaddata extends AppCompatActivity {
                             binding.place.setText("");
                             binding.amount.setText("");
                             binding.balance.setText("");
-                            Toast.makeText(uploaddata.this,"Successfuly Uploaded",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(uploaddata.this,"Successfully Uploaded",Toast.LENGTH_SHORT).show();
 
                         }
                     });

@@ -15,17 +15,21 @@ import androidx.appcompat.widget.SearchView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
+import java.util.ArrayList;
+import java.util.Map;
+
 public class SalesPage extends AppCompatActivity {
     ListView listView;
-
-    String[] name={"Apple","Banana","Grapes","guava"};
     ArrayAdapter<String> arrayAdapter;
+//    Map<String, String> question = dataSnapshot.child("Sales").getValue(Map.class);
+    String[] name={"Apple","Banana","Grapes","guava"};
     FloatingActionButton fab ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sales_page);
+
         listView=findViewById(R.id.listview);
         fab=findViewById(R.id.fab);
         arrayAdapter= new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, name);
@@ -33,9 +37,9 @@ public class SalesPage extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                    Snackbar.make(view, "Pick your file", Snackbar.LENGTH_LONG)
-                            .setAction("Action", null).show();
-                Intent intent=new Intent(getApplicationContext(),Pickfile.class);
+                    //Snackbar.make(view, "Pick your file", Snackbar.LENGTH_LONG)
+                       //     .setAction("Action", null).show();
+                Intent intent=new Intent(getApplicationContext(),uploaddata.class);
                 startActivity(intent);
                 finish();
                 }

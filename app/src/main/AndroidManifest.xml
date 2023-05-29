@@ -3,8 +3,7 @@
     package="com.example.BillingDemo">
 
     <uses-permission android:name="android.permission.INTERNET" />
-
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:allowBackup="true"
@@ -13,6 +12,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Material3.Light">
+        <activity
+            android:name=".SalesFirstPage"
+            android:exported="true" />
+        <activity
+            android:name=".SalesReport"
+            android:exported="true" />
         <activity
             android:name=".uploaddata"
             android:exported="true" />
