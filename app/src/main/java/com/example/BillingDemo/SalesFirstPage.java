@@ -10,8 +10,10 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.SearchEvent;
+import android.view.View;
 import android.widget.SearchView;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -25,6 +27,7 @@ RecyclerView recyclerView;
 ArrayList<UserHelperJava> list;
 DatabaseReference databaseReference;
 MyAdapter my;
+    FloatingActionButton fab ;
 
     @Override
     public void onBackPressed() {
@@ -38,6 +41,18 @@ MyAdapter my;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sales_first_page);
         recyclerView=findViewById(R.id.recycleview);
+        fab=findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //Snackbar.make(view, "Pick your file", Snackbar.LENGTH_LONG)
+                //     .setAction("Action", null).show();
+                Intent intent=new Intent(getApplicationContext(),uploaddata.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+
         databaseReference= FirebaseDatabase.getInstance().getReference("Sales");
         list=new ArrayList<>();
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -63,6 +78,7 @@ MyAdapter my;
         });
 
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
