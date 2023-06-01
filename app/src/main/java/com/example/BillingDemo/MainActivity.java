@@ -16,7 +16,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //FirebaseAuth auth;
 //Button button;
 //TextView textView;
-//FirebaseUser user;
+
+
+    //FirebaseUser user;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
