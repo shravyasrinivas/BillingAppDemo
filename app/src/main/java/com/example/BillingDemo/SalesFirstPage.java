@@ -32,9 +32,10 @@ MyAdapter my;
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        startActivity(new Intent(SalesFirstPage.this,uploaddata.class));
+        startActivity(new Intent(SalesFirstPage.this,MainActivity.class));
   finish();
     }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
