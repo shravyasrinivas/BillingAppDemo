@@ -4,6 +4,7 @@ package com.example.BillingDemo;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
@@ -20,7 +21,12 @@ public class uploaddata extends AppCompatActivity {
 
     FirebaseDatabase db;
     DatabaseReference reference;
-
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        startActivity(new Intent(uploaddata.this,SalesFirstPage.class));
+        finish();
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
