@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -11,6 +12,7 @@ import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.ktx.Firebase;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 //FirebaseAuth auth;
@@ -19,6 +21,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
     //FirebaseUser user;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,9 +29,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         Button button1 = findViewById(R.id.button1);
         Button button2 = findViewById(R.id.button2);
-
+        Button logout=findViewById(R.id.logout);
         button1.setOnClickListener(this);
         button2.setOnClickListener(this);
+        logout.setOnClickListener(this);
+
 
 
 
@@ -49,9 +54,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 startActivity(intent2);
                 finish();
                 break;
+            case R.id.logout:
+                FirebaseAuth.getInstance().signOut();
+                Toast.makeText(getApplicationContext(), "Logout", Toast.LENGTH_SHORT).show();
+                Intent intent3=new Intent(getApplicationContext(),Login.class);
+                startActivity(intent3);
+                finish();
+                break;
 
         }
     }
+
 }
 //    @Override
 //    protected void onCreate(Bundle savedInstanceState) {

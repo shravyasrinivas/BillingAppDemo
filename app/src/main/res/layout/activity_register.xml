@@ -26,16 +26,23 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
     </com.google.android.material.textfield.TextInputLayout>
+
     <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/passwordTextInputLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:hint="@string/password"
+        app:endIconMode="password_toggle">
+
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/pwd"
-            android:hint="@string/password"
-            android:inputType="textPassword"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:inputType="textPassword" />
+
+        <!--    </com.google.android.material.textfield.TextInputLayout>-->
     </com.google.android.material.textfield.TextInputLayout>
+
     <ProgressBar
         android:id="@+id/progressBar"
         android:visibility="gone"

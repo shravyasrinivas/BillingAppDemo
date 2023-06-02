@@ -7,12 +7,15 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.InputType;
 import android.text.TextUtils;
+import android.text.method.PasswordTransformationMethod;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.ToggleButton;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -38,18 +41,24 @@ public class Login extends AppCompatActivity {
             finish();
         }
     }
+
+
+
+  
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         mAuth=FirebaseAuth.getInstance();
         editTextEmail=findViewById(R.id.email);
-//        editTextPassword=findViewById(R.id.pwd);
-        EditText passwordEditText = findViewById(R.id.pwd);
-        passwordEditText.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+       editTextPassword=findViewById(R.id.pwd);
+//        EditText passwordEditText = findViewById(R.id.pwd);
+        editTextPassword.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+
         buttonLogin=findViewById(R.id.btn_login);
         progressbar=findViewById(R.id.progressBar);
         textView=findViewById(R.id.registerNow);
+
         textView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -58,6 +67,8 @@ public class Login extends AppCompatActivity {
                 finish();
             }
         });
+
+
 
         buttonLogin.setOnClickListener(new View.OnClickListener() {
             @Override
