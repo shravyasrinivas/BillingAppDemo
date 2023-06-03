@@ -27,9 +27,7 @@ public class ResultActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.result);
-
         edittext1 = findViewById(R.id.edittext1);
-
         String uriString = getIntent().getStringExtra("uri");
         Uri uri = Uri.parse(uriString);
         _extractTextFromUri(getApplicationContext(), uri);

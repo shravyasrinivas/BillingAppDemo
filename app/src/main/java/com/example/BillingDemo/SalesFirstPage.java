@@ -12,6 +12,7 @@ import android.view.MenuItem;
 import android.view.SearchEvent;
 import android.view.View;
 import android.widget.SearchView;
+import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.DataSnapshot;
@@ -41,44 +42,64 @@ MyAdapter my;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sales_first_page);
-        recyclerView=findViewById(R.id.recycleview);
-        fab=findViewById(R.id.fab);
+        recyclerView = findViewById(R.id.recycleview);
+        fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //Snackbar.make(view, "Pick your file", Snackbar.LENGTH_LONG)
                 //     .setAction("Action", null).show();
-                Intent intent=new Intent(getApplicationContext(),uploaddata.class);
+                Intent intent = new Intent(getApplicationContext(), uploaddata.class);
                 startActivity(intent);
                 finish();
             }
         });
 
-        databaseReference= FirebaseDatabase.getInstance().getReference("Sales");
-        list=new ArrayList<>();
+        databaseReference = FirebaseDatabase.getInstance().getReference("Sales");
+        list = new ArrayList<>();
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for(DataSnapshot dataSnapshot:snapshot.getChildren())
-                {
-                    UserHelperJava user=dataSnapshot.getValue(UserHelperJava.class);
+                 list.clear(); // Clear the list before adding data from the snapshot
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                    UserHelperJava user = dataSnapshot.getValue(UserHelperJava.class);
                     list.add(user);
                 }
-                my =new MyAdapter(SalesFirstPage.this, list);
+                my = new MyAdapter(SalesFirstPage.this, list);
                 recyclerView.setAdapter(my);
                 my.notifyDataSetChanged();
             }
 
-
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
+                // Handle any database error
+                Toast.makeText(SalesFirstPage.this, "Database error: " + error.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
-
     }
+
+//        databaseReference.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                for(DataSnapshot dataSnapshot:snapshot.getChildren())
+//                {
+//                    UserHelperJava user=dataSnapshot.getValue(UserHelperJava.class);
+//                    list.add(user);
+//                }
+//                my =new MyAdapter(SalesFirstPage.this, list);
+//                recyclerView.setAdapter(my);
+//                my.notifyDataSetChanged();
+//            }
+
+
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) {
+//
+//            }
+//        });
+//
+//    }
 
 
     @Override

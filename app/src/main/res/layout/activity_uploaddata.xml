@@ -90,7 +90,7 @@
         android:ems="10"
 
         android:hint="Bill No."
-        android:inputType="text"
+        android:inputType="number"
         android:maxHeight="50px"
         android:padding="10dp"
         android:text=""
