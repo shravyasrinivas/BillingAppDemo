@@ -1,12 +1,18 @@
 package com.example.BillingDemo;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class UserHelperJava {
     String billno,name,place, amount,balance;
+    String date;
 
     public UserHelperJava() {
 
     }
 
-    public UserHelperJava(String billno, String name, String place, String amount, String balance) {
+    public UserHelperJava(String date,String billno, String name, String place, String amount, String balance) {
+        this.date=date;
         this.billno = billno;
         this.name = name;
         this.place = place;
@@ -52,5 +58,12 @@ public class UserHelperJava {
 
     public void setBalance(String balance) {
         this.balance = balance;
+    }
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String  date) {
+        this.date = date;
     }
 }

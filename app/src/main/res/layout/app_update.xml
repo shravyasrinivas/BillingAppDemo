@@ -19,6 +19,17 @@ android:gravity="center"
         android:id="@+id/txtTitle"
         android:layout_margin="21dp"
         android:text="Update details"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#fff"
+        android:padding="11dp"
+        android:id="@+id/editDate"
+        android:hint="Date"
+        android:clickable="true"
+        android:focusable="false"
+        />
+
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
