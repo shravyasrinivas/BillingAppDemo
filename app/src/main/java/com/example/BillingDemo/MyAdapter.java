@@ -51,7 +51,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> impl
         return new MyViewHolder(v);
     }
     @Override
-    public void onBindViewHolder(@NonNull MyAdapter.MyViewHolder holder, int position) {
+    /*public void onBindViewHolder(@NonNull MyAdapter.MyViewHolder holder, int position) {
         UserHelperJava user = list.get(holder.getAdapterPosition());
         holder.name.setText(user.getName());
         holder.billno.setText(user.getBillno());
@@ -69,11 +69,85 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> impl
         edtBillNumber.setText(user.getBillno());
         edtPlace.setText(user.getPlace());
         edtAmt.setText(user.getAmount());
-        edtBal.setText(user.getBalance());
+        edtBal.setText(user.getBalance());*/
+
+
+
+        public void onBindViewHolder(@NonNull MyAdapter.MyViewHolder holder, int position) {
+            UserHelperJava user = list.get(holder.getAdapterPosition());
+            holder.name.setText(user.getName());
+            holder.billno.setText(user.getBillno());
+
+            Dialog dialog = new Dialog(context);
+            databaseReference = FirebaseDatabase.getInstance().getReference("Sales");
+            dialog.setContentView(R.layout.app_update);
+            EditText edtName = dialog.findViewById(R.id.editName);
+            EditText edtBillNumber = dialog.findViewById(R.id.editBillNum);
+            EditText edtPlace = dialog.findViewById(R.id.editPlace);
+            EditText edtAmt = dialog.findViewById(R.id.editAmt);
+            EditText edtBal = dialog.findViewById(R.id.editBal);
+            Button btnAction = dialog.findViewById(R.id.btnAction);
+            edtName.setText(user.getName());
+            edtBillNumber.setText(user.getBillno());
+            edtPlace.setText(user.getPlace());
+            edtAmt.setText(user.getAmount());
+            edtBal.setText(user.getBalance());
+
+            btnAction.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    String name = edtName.getText().toString().trim();
+                    String billno = edtBillNumber.getText().toString().trim();
+                    String place = edtPlace.getText().toString().trim();
+                    String amount = edtAmt.getText().toString().trim();
+                    String balance = edtBal.getText().toString().trim();
+
+                    if (name.isEmpty()) {
+                        Toast.makeText(context, "Enter name", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                    if (billno.isEmpty()) {
+                        Toast.makeText(context, "Enter bill number", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                    if (amount.isEmpty()) {
+                        Toast.makeText(context, "Enter amount", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                    if (balance.isEmpty()) {
+                        Toast.makeText(context, "Enter balance", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                    if (place.isEmpty()) {
+                        Toast.makeText(context, "Enter place", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+
+                    // Update the values of the existing user object
+                    user.setName(name);
+                    user.setBillno(billno);
+                    user.setPlace(place);
+                    user.setAmount(amount);
+                    user.setBalance(balance);
+
+                    // Update the data in the database
+                    databaseReference.child(user.getBillno()).setValue(user);
+
+                    dialog.dismiss();
+                }
+            });
+
+            holder.llrow.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    dialog.show();
+                }
+            });
+        }
 
         // Add a ValueEventListener to update the UI when data changes in the database
-        DatabaseReference userRef = databaseReference.child(user.getBillno()); // Assuming you have the ID field in the UserHelperJava class
-        ValueEventListener valueEventListener = new ValueEventListener() {
+      //  DatabaseReference userRef = databaseReference.child(user.getBillno()); // Assuming you have the ID field in the UserHelperJava class
+       /* ValueEventListener valueEventListener = new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 // Retrieve the updated user data
@@ -95,8 +169,8 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> impl
             }
         };
         userRef.addValueEventListener(valueEventListener);
-
-        btnAction.setOnClickListener(new View.OnClickListener() {
+*/
+        /*btnAction.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String name = edtName.getText().toString().trim();
@@ -135,23 +209,9 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> impl
 
                 dialog.dismiss();
             }
-        });
+        });*/
 
-        // Add dismiss listener to remove the ValueEventListener when the dialog is dismissed
-        dialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
-            @Override
-            public void onDismiss(DialogInterface dialogInterface) {
-                userRef.removeEventListener(valueEventListener);
-            }
-        });
 
-        holder.llrow.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                dialog.show();
-            }
-        });
-    }
 
 
 
