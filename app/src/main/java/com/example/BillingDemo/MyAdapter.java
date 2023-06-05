@@ -162,6 +162,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> impl
         datePickerDialog.show();
     }
 
+
 //    public void onBindViewHolder(@NonNull MyAdapter.MyViewHolder holder, int position) {
 //        UserHelperJava user = list.get(holder.getAdapterPosition());
 //        holder.name.setText(user.getName());
@@ -322,10 +323,10 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> impl
             name=itemView.findViewById(R.id.textName);
             billno=itemView.findViewById(R.id.textbillno);
             date=itemView.findViewById(R.id.Date);
-
             llrow=itemView.findViewById(R.id.llrow);
 
 
         }
     }
+
 }
