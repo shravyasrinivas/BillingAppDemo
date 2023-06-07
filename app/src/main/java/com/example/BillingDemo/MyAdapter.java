@@ -14,6 +14,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Filter;
 import android.widget.Filterable;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -39,7 +40,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> impl
     ArrayList<UserHelperJava> list;
     ArrayList<UserHelperJava> listfull;
     DatabaseReference databaseReference;
-
+    private int[] tagIcons = {R.drawable.ic_baseline_done_24, R.drawable.ic_baseline_close_24};
 
     public MyAdapter(Context context, ArrayList<UserHelperJava> list) {
         this.context = context;
@@ -61,7 +62,13 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> impl
         UserHelperJava user = list.get(holder.getAdapterPosition());
         holder.name.setText(user.getName());
         holder.billno.setText(user.getBillno());
+//        UserHelperJava user2 = list.get(position);
+        // Set the balance value to your view
+      //  holder.balanceTextView.setText(user.getBalance());
 
+        String balance = user.getBalance();
+        int tagIconResId = balance.equals("0") ? R.drawable.ic_baseline_check_circle_outline_24 : R.drawable.ic_baseline_cancel_24;
+        holder.tagImageView.setImageResource(tagIconResId);
         Dialog dialog = new Dialog(context);
         databaseReference = FirebaseDatabase.getInstance().getReference("Sales");
         dialog.setContentView(R.layout.app_update);
@@ -316,14 +323,17 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> impl
     };
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
-        TextView name,billno,date;
+        TextView name,billno,date,balanceTextView;
         LinearLayout llrow;
+        ImageView tagImageView;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             name=itemView.findViewById(R.id.textName);
             billno=itemView.findViewById(R.id.textbillno);
             date=itemView.findViewById(R.id.Date);
             llrow=itemView.findViewById(R.id.llrow);
+//            balanceTextView=itemView.findViewById(R.id.balanceTextView);
+            tagImageView=itemView.findViewById(R.id.tagImageView);
 
 
         }
