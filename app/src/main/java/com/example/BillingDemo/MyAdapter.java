@@ -1,5 +1,7 @@
 package com.example.BillingDemo;
 
+
+
 import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
@@ -40,7 +42,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> impl
     ArrayList<UserHelperJava> list;
     ArrayList<UserHelperJava> listfull;
     DatabaseReference databaseReference;
-    private int[] tagIcons = {R.drawable.ic_baseline_done_24, R.drawable.ic_baseline_close_24};
+    //private int[] tagIcons = {R.drawable.ic_baseline_done_24, R.drawable.ic_baseline_close_24};
 
     public MyAdapter(Context context, ArrayList<UserHelperJava> list) {
         this.context = context;
@@ -62,13 +64,24 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> impl
         UserHelperJava user = list.get(holder.getAdapterPosition());
         holder.name.setText(user.getName());
         holder.billno.setText(user.getBillno());
-//        UserHelperJava user2 = list.get(position);
-        // Set the balance value to your view
-      //  holder.balanceTextView.setText(user.getBalance());
+
+
 
         String balance = user.getBalance();
         int tagIconResId = balance.equals("0") ? R.drawable.ic_baseline_check_circle_outline_24 : R.drawable.ic_baseline_cancel_24;
         holder.tagImageView.setImageResource(tagIconResId);
+
+        int daysPending = user.getDaysPending();
+        if (daysPending > 0) {
+            holder.daysPending.setVisibility(View.VISIBLE);
+            String daysPendingText = context.getString(R.string.days_pending, daysPending);
+            holder.daysPending.setText(daysPendingText);
+        } else {
+            holder.daysPending.setVisibility(View.GONE);
+        }
+
+
+
         Dialog dialog = new Dialog(context);
         databaseReference = FirebaseDatabase.getInstance().getReference("Sales");
         dialog.setContentView(R.layout.app_update);
@@ -77,14 +90,17 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> impl
         EditText edtPlace = dialog.findViewById(R.id.editPlace);
         EditText edtAmt = dialog.findViewById(R.id.editAmt);
         EditText edtBal = dialog.findViewById(R.id.editBal);
+
         Button btnAction = dialog.findViewById(R.id.btnAction);
         TextView edtDate = dialog.findViewById(R.id.editDate);
+        TextView edtDueDate=dialog.findViewById(R.id.editdueDate);
         edtName.setText(user.getName());
         edtBillNumber.setText(user.getBillno());
         edtPlace.setText(user.getPlace());
         edtAmt.setText(user.getAmount());
         edtBal.setText(user.getBalance());
         edtDate.setText(user.getDate());
+        edtDueDate.setText(user.getDuedate());
         DatabaseReference userRef = databaseReference.child(user.getBillno());
         ValueEventListener valueEventListener = new ValueEventListener() {
             @Override
@@ -96,7 +112,8 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> impl
                     edtPlace.setText(updatedData.getPlace());
                     edtAmt.setText(updatedData.getAmount());
                     edtBal.setText(updatedData.getBalance());
-                    edtDate.setText(updatedData.getDate()); // Update the date
+                    edtDate.setText(updatedData.getDate());
+                    edtDueDate.setText(updatedData.getDuedate());// Update the date
                 }
             }
 
@@ -114,13 +131,15 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> impl
                 String place = edtPlace.getText().toString().trim();
                 String amount = edtAmt.getText().toString().trim();
                 String balance = edtBal.getText().toString().trim();
-                String date = edtDate.getText().toString().trim(); // Get the updated date
-                if (name.isEmpty() || billno.isEmpty() || place.isEmpty() || amount.isEmpty() || balance.isEmpty() || date.isEmpty()) {
+                String date = edtDate.getText().toString().trim();
+                String duedate = edtDueDate.getText().toString().trim();
+                // Get the updated date
+                if (name.isEmpty() || billno.isEmpty() || place.isEmpty() || amount.isEmpty() || balance.isEmpty() || date.isEmpty() || duedate.isEmpty()) {
                     Toast.makeText(context, "Please fill in all the fields", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
-                UserHelperJava updatedUser = new UserHelperJava(date, billno, name, place, amount, balance);
+                UserHelperJava updatedUser = new UserHelperJava(date, billno, name, place, amount, balance,duedate);
                 list.set(holder.getAdapterPosition(), updatedUser);
                 notifyItemChanged(holder.getAdapterPosition());
 
@@ -151,7 +170,15 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> impl
                 showDatePicker(edtDate);
             }
         });
+        edtDueDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showDatePicker(edtDueDate);
+            }
+        });
     }
+
+
 
     public void showDatePicker(TextView textView) {
         DatePickerDialog datePickerDialog = new DatePickerDialog(context, new DatePickerDialog.OnDateSetListener() {
@@ -169,120 +196,6 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> impl
         datePickerDialog.show();
     }
 
-
-//    public void onBindViewHolder(@NonNull MyAdapter.MyViewHolder holder, int position) {
-//        UserHelperJava user = list.get(holder.getAdapterPosition());
-//        holder.name.setText(user.getName());
-//        holder.billno.setText(user.getBillno());
-//
-//
-//
-//        Dialog dialog = new Dialog(context);
-//        databaseReference = FirebaseDatabase.getInstance().getReference("Sales");
-//        dialog.setContentView(R.layout.app_update);
-//        EditText edtName = dialog.findViewById(R.id.editName);
-//        EditText edtBillNumber = dialog.findViewById(R.id.editBillNum);
-//        EditText edtPlace = dialog.findViewById(R.id.editPlace);
-//        EditText edtAmt = dialog.findViewById(R.id.editAmt);
-//
-//        EditText edtBal = dialog.findViewById(R.id.editBal);
-//        Button btnAction = dialog.findViewById(R.id.btnAction);
-//
-//
-//        edtName.setText(user.getName());
-//        edtBillNumber.setText(user.getBillno());
-//        edtPlace.setText(user.getPlace());
-//        edtAmt.setText(user.getAmount());
-//        edtBal.setText(user.getBalance());
-//
-//
-//        // Add a ValueEventListener to update the UI when data changes in the database
-//        DatabaseReference userRef = databaseReference.child(user.getBillno()); // Assuming you have the ID field in the UserHelperJava class
-//        ValueEventListener valueEventListener = new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                // Retrieve the updated user data
-//                UserHelperJava updatedData = snapshot.getValue(UserHelperJava.class);
-//                if (updatedData != null) {
-//                    // Update the UI with the updated data
-//                    edtName.setText(updatedData.getName());
-//
-//                    edtBillNumber.setText(updatedData.getBillno());
-//                    edtPlace.setText(updatedData.getPlace());
-//                    edtAmt.setText(updatedData.getAmount());
-//                    edtBal.setText(updatedData.getBalance());
-//                }
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError error) {
-//                // Handle any database error
-//                Toast.makeText(context, "Database error: " + error.getMessage(), Toast.LENGTH_SHORT).show();
-//            }
-//        };
-//        userRef.addValueEventListener(valueEventListener);
-//
-//        btnAction.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                String name = edtName.getText().toString().trim();
-//                String billno = edtBillNumber.getText().toString().trim();
-//                String place = edtPlace.getText().toString().trim();
-//                String amount = edtAmt.getText().toString().trim();
-//                String balance = edtBal.getText().toString().trim();
-//String currentDate="";
-//                if (name.isEmpty()) {
-//                    Toast.makeText(context, "Enter name", Toast.LENGTH_SHORT).show();
-//                    return;
-//                }
-//                if (billno.isEmpty()) {
-//                    Toast.makeText(context, "Enter bill number", Toast.LENGTH_SHORT).show();
-//                    return;
-//                }
-//                if (amount.isEmpty()) {
-//                    Toast.makeText(context, "Enter amount", Toast.LENGTH_SHORT).show();
-//                    return;
-//                }
-//                if (balance.isEmpty()) {
-//                    Toast.makeText(context, "Enter balance", Toast.LENGTH_SHORT).show();
-//                    return;
-//                }
-//                if (place.isEmpty()) {
-//                    Toast.makeText(context, "Enter place", Toast.LENGTH_SHORT).show();
-//                    return;
-//                }
-//
-//                UserHelperJava updatedUser = new UserHelperJava(currentDate,billno, name, place, amount, balance);
-//                list.set(holder.getAdapterPosition(), updatedUser);
-//                notifyItemChanged(holder.getAdapterPosition());
-//
-//
-//                userRef.setValue(updatedUser);
-//
-//                dialog.dismiss();
-//            }
-//        });
-//
-//        // Add dismiss listener to remove the ValueEventListener when the dialog is dismissed
-//        dialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
-//            @Override
-//            public void onDismiss(DialogInterface dialogInterface) {
-//                userRef.removeEventListener(valueEventListener);
-//            }
-//        });
-//
-//        holder.llrow.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                dialog.show();
-//            }
-//        });
-//    }
-
-
-
-
-
     @Override
     public int getItemCount() {
         return list.size();
@@ -297,7 +210,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> impl
         protected FilterResults performFiltering(CharSequence constraint) {
             ArrayList<UserHelperJava> filteredList=new ArrayList<>();
             if(constraint ==null|| constraint.length()==0){
-            filteredList.addAll(listfull);
+                filteredList.addAll(listfull);
             }
             else{
                 String filterPattern=constraint.toString().toLowerCase().trim();
@@ -323,7 +236,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> impl
     };
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
-        TextView name,billno,date,balanceTextView;
+        TextView name,billno,date,balanceTextView,daysPending,duedate;
         LinearLayout llrow;
         ImageView tagImageView;
         public MyViewHolder(@NonNull View itemView) {
@@ -331,12 +244,17 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> impl
             name=itemView.findViewById(R.id.textName);
             billno=itemView.findViewById(R.id.textbillno);
             date=itemView.findViewById(R.id.Date);
+            duedate=itemView.findViewById(R.id.duedate);
             llrow=itemView.findViewById(R.id.llrow);
 //            balanceTextView=itemView.findViewById(R.id.balanceTextView);
             tagImageView=itemView.findViewById(R.id.tagImageView);
+            daysPending = itemView.findViewById(R.id.daysPending);
 
 
         }
     }
 
 }
+
+
+

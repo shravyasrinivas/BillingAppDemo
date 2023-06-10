@@ -228,6 +228,36 @@
         tools:ignore="MissingConstraints" />
 
 
+    <TextView
+        android:id="@+id/duedate"
+        android:layout_width="259dp"
+        android:layout_height="48dp"
+        android:layout_below="@+id/amount"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="568dp"
+        android:layout_marginEnd="73dp"
+        android:layout_weight="1"
+        android:background="@drawable/rounded_button"
+        android:clickable="true"
+        android:drawableLeft="@drawable/ic_baseline_calendar_today_24"
+        android:drawablePadding="20dp"
+        android:ems="10"
+        android:focusable="false"
+        android:hint="Due Date"
+        android:padding="10dp"
+        android:textColor="#FFE8D6"
+        android:textColorHint="#8CFFFFFF"
+        android:textSize="20sp"
+        app:layout_constraintHeight_default="wrap"
+        app:layout_constraintHorizontal_bias="0.348"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="101dp"
+        tools:layout_editor_absoluteY="172dp" />
+
     <Button
         android:id="@+id/save"
         android:layout_width="wrap_content"
@@ -243,42 +273,42 @@
         android:textStyle="bold" />
 
 
-    <Button
-        android:id="@+id/button1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/save"
-        android:layout_alignParentEnd="true"
-        android:layout_marginEnd="213dp"
-        android:layout_marginBottom="76dp"
-        android:layout_weight="1"
-        android:background="@drawable/rounded_button"
-        android:padding="10dp"
-        android:text="PICK FILE"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toStartOf="@id/button2"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="MissingConstraints" />
+<!--    <Button-->
+<!--        android:id="@+id/button1"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_alignBottom="@+id/save"-->
+<!--        android:layout_alignParentEnd="true"-->
+<!--        android:layout_marginEnd="213dp"-->
+<!--        android:layout_marginBottom="76dp"-->
+<!--        android:layout_weight="1"-->
+<!--        android:background="@drawable/rounded_button"-->
+<!--        android:padding="10dp"-->
+<!--        android:text="PICK FILE"-->
+<!--        android:textSize="20sp"-->
+<!--        app:layout_constraintEnd_toStartOf="@id/button2"-->
+<!--        app:layout_constraintLeft_toLeftOf="parent"-->
+<!--        app:layout_constraintRight_toRightOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent"-->
+<!--        tools:ignore="MissingConstraints" />-->
 
-    <Button
-        android:id="@+id/button2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/balance"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="37dp"
-        android:layout_marginEnd="87dp"
-        android:layout_weight="1"
-        android:background="@drawable/rounded_button"
+<!--    <Button-->
+<!--        android:id="@+id/button2"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_below="@+id/balance"-->
+<!--        android:layout_alignParentEnd="true"-->
+<!--        android:layout_marginTop="37dp"-->
+<!--        android:layout_marginEnd="87dp"-->
+<!--        android:layout_weight="1"-->
+<!--        android:background="@drawable/rounded_button"-->
 
-        android:text="SCAN"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/button1"
-        app:layout_constraintTop_toTopOf="parent" />
+<!--        android:text="SCAN"-->
+<!--        android:textSize="20sp"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toEndOf="@id/button1"-->
+<!--        app:layout_constraintTop_toTopOf="parent" />-->
 
 
 </RelativeLayout>

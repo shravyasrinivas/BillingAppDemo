@@ -27,7 +27,6 @@
                 android:textSize="24dp"
                 android:textColor="@color/black"
                 android:textStyle="bold" />
-
             <TextView
                 android:id="@+id/textName"
                 android:layout_width="wrap_content"
@@ -67,6 +66,22 @@
                 android:layout_height="wrap_content"
                 android:textSize="24dp"
                 android:textColor="@color/black" />
+            <TextView
+                android:id="@+id/daysPending"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:textColor="#FF0000"
+                android:text="@string/days_pending"
+                android:drawableStart="@drawable/ic_baseline_access_time_24"
+                android:drawablePadding="0dp"
+                android:paddingStart="8dp"
+                android:paddingEnd="8dp"
+                android:gravity="center_vertical"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textbillno" />
+
+
 
         </LinearLayout>
 
