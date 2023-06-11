@@ -29,10 +29,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         Button button1 = findViewById(R.id.button1);
         Button button2 = findViewById(R.id.button2);
-        Button logout=findViewById(R.id.logout);
+
         button1.setOnClickListener(this);
         button2.setOnClickListener(this);
-        logout.setOnClickListener(this);
+
 
 
 
@@ -54,13 +54,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 startActivity(intent2);
                 finish();
                 break;
-            case R.id.logout:
-                FirebaseAuth.getInstance().signOut();
-                Toast.makeText(getApplicationContext(), "Logout", Toast.LENGTH_SHORT).show();
-                Intent intent3=new Intent(getApplicationContext(),Login.class);
-                startActivity(intent3);
-                finish();
-                break;
+
 
         }
     }
