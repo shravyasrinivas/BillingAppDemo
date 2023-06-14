@@ -14,9 +14,9 @@
         android:layout_marginBottom="20dp"
         android:layout_width="140dp"
         android:layout_height="150dp"
-        android:backgroundTint="@color/teal_200"
+        android:backgroundTint="#8692F7"
         android:text="@string/sales"
-        android:textColor="@color/black"
+        android:textColor="@color/white"
         android:textSize="25sp" />
 
     <Button
@@ -24,8 +24,8 @@
         android:layout_marginTop="20dp"
         android:layout_width="140dp"
         android:layout_height="150dp"
-        android:backgroundTint="@color/teal_200"
-        android:textColor="@color/black"
+        android:backgroundTint="#8692F7"
+        android:textColor="@color/white"
         android:text="@string/loan"
         android:textSize="25sp" />
 

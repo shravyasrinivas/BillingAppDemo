@@ -18,8 +18,9 @@
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
-
+    <style name="MenuItemStyle" parent="@style/Widget.AppCompat.PopupMenu">
+        <item name="android:textColor">@android:color/black</item>
+    </style>
     <style name="AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
-
     <style name="PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 </resources>

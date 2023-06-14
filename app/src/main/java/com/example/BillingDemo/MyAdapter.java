@@ -50,7 +50,11 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> impl
         this.list=new ArrayList<>(listfull);
 
     }
-
+    public void setList(ArrayList<UserHelperJava> filteredList) {
+        list.clear();
+        list.addAll(filteredList);
+        notifyDataSetChanged();
+    }
 
 
     @NonNull

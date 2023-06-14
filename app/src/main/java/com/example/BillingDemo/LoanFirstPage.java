@@ -59,7 +59,7 @@ public class LoanFirstPage extends AppCompatActivity {
             }
         });
 
-        databaseReference = FirebaseDatabase.getInstance().getReference("Sales");
+        databaseReference = FirebaseDatabase.getInstance().getReference("Loan");
         list = new ArrayList<>();
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));

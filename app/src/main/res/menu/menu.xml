@@ -1,12 +1,116 @@
-<?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-<item
-    android:id="@+id/action_search"
-    android:title="@string/search"
-    android:icon="@drawable/ic_baseline_search_24"
-    app:showAsAction="always"
-    app:actionViewClass="android.widget.SearchView" />
+        <item
+            android:id="@+id/action_search"
+            android:title="@string/search"
+            android:icon="@drawable/ic_baseline_search_24"
+            app:showAsAction="always"
+            app:actionViewClass="android.widget.SearchView" />
+        <item
+            android:id="@+id/action_filter"
+            android:title="@string/filter"
+            android:icon="@drawable/ic_baseline_filter_list_24"
+            app:showAsAction="always">
+            <menu>
+                <item
+                    android:id="@+id/filter_this_week"
+                    android:title="This Week"
+                    style="@style/MenuItemStyle"
+                    />
+
+                <item
+                    android:id="@+id/filter_today"
+                    android:title="Today"
+                    style="@style/MenuItemStyle"/>
+
+                <item
+                    android:id="@+id/filter_this_month"
+                    android:title="This Month"
+                    style="@style/MenuItemStyle"/>
+
+                <item
+                    android:id="@+id/filter_specific_date"
+                    android:title="Specific Date Range"
+                    style="@style/MenuItemStyle"/>
+
+            </menu>
+        </item>
+
+    </menu>
+
+    <!--        <item-->
+    <!--            android:id="@+id/action_filter"-->
+    <!--            android:title="@string/filter"-->
+    <!--            app:showAsAction="always">-->
+    <!--            <menu>-->
+    <!--                <item-->
+    <!--                    android:id="@+id/filter_spinner"-->
+    <!--                    android:title="@string/filter"-->
+    <!--                    app:actionViewClass="android.widget.Spinner"-->
+    <!--                    app:showAsAction="always" />-->
+
+    <!--                <item-->
+    <!--                    android:id="@+id/filter_button"-->
+    <!--                    android:title="@string/select_date_range"-->
+    <!--                    app:showAsAction="ifRoom" />-->
+    <!--            </menu>-->
+
+<!--        android:id="@+id/action_filter"-->
+<!--        android:title="@string/filter"-->
+<!--        android:icon="@drawable/ic_baseline_filter_list_24"-->
+<!--        app:showAsAction="always">-->
+<!--        <menu>-->
+<!--            <item-->
+<!--                android:id="@+id/action_filter_this_week"-->
+<!--                android:title="This Week"-->
+<!--                android:checkable="true"-->
+<!--                android:checked="true" />-->
+<!--            <item-->
+<!--                android:id="@+id/action_filter_today"-->
+<!--                android:title="Today"-->
+<!--                android:checkable="true"-->
+<!--                android:checked="false" />-->
+<!--            <item-->
+<!--                android:id="@+id/action_filter_this_month"-->
+<!--                android:title="This Month"-->
+<!--                android:checkable="true"-->
+<!--                android:checked="false" />-->
+
+<!--        </menu>-->
+<!--    </item>-->
+
+<!--    <item-->
+<!--        android:id="@+id/action_search"-->
+<!--        android:title="@string/search"-->
+<!--        android:icon="@drawable/ic_baseline_search_24"-->
+<!--        app:showAsAction="always"-->
+<!--        app:actionViewClass="android.widget.SearchView" />-->
+
+<!--</menu>-->
+
+    <!--<?xml version="1.0" encoding="utf-8"?>-->
+<!--<menu xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--    xmlns:app="http://schemas.android.com/apk/res-auto">-->
+
+<!--    <item-->
+<!--        android:id="@+id/action_filter"-->
+<!--        android:title="@string/filter"-->
+<!--        android:icon="@drawable/ic_baseline_filter_list_24"-->
+<!--        app:showAsAction="always">-->
+
+<!--    </item>-->
+<!--    -->
+<!--<item-->
+<!--    android:id="@+id/action_search"-->
+<!--    android:title="@string/search"-->
+<!--    android:icon="@drawable/ic_baseline_search_24"-->
+<!--    app:showAsAction="always"-->
+<!--    app:actionViewClass="android.widget.SearchView" />-->
 
 
-</menu>
+<!--</menu>-->
+    <!--            <item-->
+    <!--                android:id="@+id/action_filter_date_range"-->
+    <!--                android:title="Specific Date Range"-->
+    <!--                android:checkable="true"-->
+    <!--                android:checked="false" />-->

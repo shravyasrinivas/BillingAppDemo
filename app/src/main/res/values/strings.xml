@@ -25,5 +25,11 @@
     <string name="days_pending">%d</string>
     <string name="open_nav">Open Navigation Drawer</string>
     <string name="close_nav">Close Navigation Drawer</string>
+    <string name="filter">Filter</string>
+    <string name="tomorrow">Tomorrow</string>
+    <string name="this_week">This week</string>
+    <string name="this_month">This_month</string>
+    <string name="specific_date">Specific date</string>
+    <string name="select_date_range">"Select Date "</string>
 
 </resources>

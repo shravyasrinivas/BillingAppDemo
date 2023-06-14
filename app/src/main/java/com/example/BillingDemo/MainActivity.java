@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.button2:
                 Toast.makeText(getApplicationContext(), "Loan Page", Toast.LENGTH_SHORT).show();
-                Intent intent2=new Intent(getApplicationContext(),SalesPage.class);
+                Intent intent2=new Intent(getApplicationContext(),LoanFirstPage.class);
                 startActivity(intent2);
                 finish();
                 break;

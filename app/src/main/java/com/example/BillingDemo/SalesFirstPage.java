@@ -11,12 +11,14 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.DatePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.DatePicker;
 import android.widget.ImageView;
 import android.widget.SearchView;
 import android.widget.TextView;
@@ -38,7 +40,12 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
 
 public class SalesFirstPage extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -119,7 +126,9 @@ public class SalesFirstPage extends AppCompatActivity implements NavigationView.
                 }
                 adapter = new MyAdapter(SalesFirstPage.this, list);
                 recyclerView.setAdapter(adapter);
-                adapter.notifyDataSetChanged();
+
+//                recyclerView.setAdapter(adapter);
+
             }
 
             @Override
@@ -212,6 +221,149 @@ public class SalesFirstPage extends AppCompatActivity implements NavigationView.
         });
         return super.onCreateOptionsMenu(menu);
     }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        if (id == R.id.filter_this_week) {
+            filterThisWeek();
+            return true;
+        } else if (id == R.id.filter_today) {
+            filterToday();
+            return true;
+        } else if (id == R.id.filter_this_month) {
+            filterThisMonth();
+            return true;
+        } else if (id == R.id.filter_specific_date) {
+            showDatePickerDialog();
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+    private void filterThisWeek() {
+        // Get the current date and calculate the start and end dates for this week
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
+        Date startDate = calendar.getTime();
+        calendar.add(Calendar.DATE, 6);
+        Date endDate = calendar.getTime();
+
+        // Convert the start and end dates to the desired format (e.g., dd/MM/yyyy)
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        String startDateString = dateFormat.format(startDate);
+        String endDateString = dateFormat.format(endDate);
+
+        // Filter the list based on the date range
+        ArrayList<UserHelperJava> filteredList = new ArrayList<>();
+        for (UserHelperJava user : list) {
+            try {
+                Date dueDate = dateFormat.parse(user.getDuedate());
+                if (dueDate.after(startDate) && dueDate.before(endDate)) {
+                    filteredList.add(user);
+                }
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+        }
+
+        // Update the RecyclerView with the filtered list
+        adapter.setList(filteredList);
+        adapter.notifyDataSetChanged();
+    }
+
+
+
+    private void filterToday() {
+        // Get the current date
+        Date today = new Date();
+
+        // Convert the current date to the desired format (e.g., dd/MM/yyyy)
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        String todayString = dateFormat.format(today);
+
+        // Filter the list based on today's date
+        ArrayList<UserHelperJava> filteredList = new ArrayList<>();
+        for (UserHelperJava user : list) {
+            if (user.getDuedate().equals(todayString)) {
+                filteredList.add(user);
+            }
+        }
+
+        // Update the RecyclerView with the filtered list
+        adapter.setList(filteredList);
+        adapter.notifyDataSetChanged();
+    }
+
+    private void filterThisMonth() {
+        // Get the current date and calculate the start and end dates for this month
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.DAY_OF_MONTH, 1);
+        Date startDate = calendar.getTime();
+        calendar.set(Calendar.DAY_OF_MONTH, calendar.getActualMaximum(Calendar.DAY_OF_MONTH));
+        Date endDate = calendar.getTime();
+
+        // Convert the start and end dates to the desired format (e.g., dd/MM/yyyy)
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
+        String startDateString = dateFormat.format(startDate);
+        String endDateString = dateFormat.format(endDate);
+
+        // Filter the list based on the date range
+        ArrayList<UserHelperJava> filteredList = new ArrayList<>();
+        for (UserHelperJava user : list) {
+            try {
+                Date dueDate = dateFormat.parse(user.getDuedate());
+                if (dueDate.after(startDate) && dueDate.before(endDate)) {
+                    filteredList.add(user);
+                }
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+        }
+
+        // Update the RecyclerView with the filtered list
+        adapter.setList(filteredList);
+        adapter.notifyDataSetChanged();
+    }
+
+    private void showDatePickerDialog() {
+        // Show a DatePickerDialog to select a specific date range
+        DatePickerDialog datePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                // Create a Calendar instance and set the selected date
+                Calendar calendar = Calendar.getInstance();
+                calendar.set(Calendar.YEAR, year);
+                calendar.set(Calendar.MONTH, month);
+                calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                Date selectedDate = calendar.getTime();
+
+                // Convert the selected date to the desired format (e.g., dd/MM/yyyy)
+                SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
+                String selectedDateString = dateFormat.format(selectedDate);
+
+                // Filter the list based on the selected date
+                ArrayList<UserHelperJava> filteredList = new ArrayList<>();
+                for (UserHelperJava user : list) {
+                    try {
+                        Date dueDate = dateFormat.parse(user.getDuedate());
+                        if (dueDate.before(selectedDate)) {
+                            filteredList.add(user);
+                        }
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                // Update the RecyclerView with the filtered list
+                adapter.setList(filteredList);
+                adapter.notifyDataSetChanged();
+            }
+        }, Calendar.getInstance().get(Calendar.YEAR), Calendar.getInstance().get(Calendar.MONTH), Calendar.getInstance().get(Calendar.DAY_OF_MONTH));
+        datePickerDialog.show();
+    }
+
+
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {

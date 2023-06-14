@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#b0f7f1"
+    android:background="#8692F7"
     tools:context=".uploaddata">
 
 
@@ -37,9 +37,8 @@
         android:layout_alignParentEnd="true"
         android:layout_marginTop="37dp"
         android:layout_marginEnd="119dp"
-
         android:text="Sales Details"
-        android:textColor="#CB997E"
+        android:textColor="@color/violet"
         android:textSize="25sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -66,8 +65,8 @@
         android:focusable="false"
         android:hint="Select Date"
         android:padding="10dp"
-        android:textColor="#FFE8D6"
-        android:textColorHint="#8CFFFFFF"
+        android:textColor="#090908"
+        android:textColorHint="#AAAA83"
         android:textSize="20sp"
         app:layout_constraintHeight_default="wrap"
         app:layout_constraintHorizontal_bias="0.348"
@@ -94,8 +93,8 @@
         android:maxHeight="50px"
         android:padding="10dp"
         android:text=""
-        android:textColor="#FFE8D6"
-        android:textColorHint="#8CFFFFFF"
+        android:textColor="#090908"
+        android:textColorHint="#AAAA83"
         app:layout_constraintHeight_default="wrap"
         app:layout_constraintHorizontal_bias="0.348"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -147,8 +146,8 @@
         android:inputType="text"
         android:maxHeight="50px"
         android:padding="10dp"
-        android:textColor="#FFE8D6"
-        android:textColorHint="#8CFFFFFF"
+        android:textColor="#090908"
+        android:textColorHint="#AAAA83"
         app:layout_constraintHorizontal_bias="0.348"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -169,8 +168,8 @@
         android:inputType="text"
         android:maxHeight="50px"
         android:padding="10dp"
-        android:textColor="#FFE8D6"
-        android:textColorHint="#8CFFFFFF"
+        android:textColor="#090908"
+        android:textColorHint="#AAAA83"
         app:layout_constraintHorizontal_bias="0.348"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -193,8 +192,8 @@
         android:inputType="numberDecimal"
         android:maxHeight="50px"
         android:padding="10dp"
-        android:textColor="#FFE8D6"
-        android:textColorHint="#8CFFFFFF"
+        android:textColor="#090908"
+        android:textColorHint="#AAAA83"
         app:layout_constraintHeight_default="wrap"
         app:layout_constraintHorizontal_bias="0.184"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -218,8 +217,8 @@
         android:inputType="numberDecimal"
         android:maxHeight="50px"
         android:padding="10dp"
-        android:textColor="#FFE8D6"
-        android:textColorHint="#8CFFFFFF"
+        android:textColor="#090908"
+        android:textColorHint="#AAAA83"
         app:layout_constraintHeight_default="wrap"
         app:layout_constraintHorizontal_bias="0.184"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -246,8 +245,8 @@
         android:focusable="false"
         android:hint="Due Date"
         android:padding="10dp"
-        android:textColor="#FFE8D6"
-        android:textColorHint="#8CFFFFFF"
+        android:textColor="#090908"
+        android:textColorHint="#AAAA83"
         android:textSize="20sp"
         app:layout_constraintHeight_default="wrap"
         app:layout_constraintHorizontal_bias="0.348"
@@ -271,6 +270,8 @@
         android:textColor="@color/white"
         android:textSize="20sp"
         android:textStyle="bold" />
+
+</RelativeLayout>
 
 
 <!--    <Button-->
@@ -310,8 +311,6 @@
 <!--        app:layout_constraintStart_toEndOf="@id/button1"-->
 <!--        app:layout_constraintTop_toTopOf="parent" />-->
 
-
-</RelativeLayout>
 
     <!--<?xml version="1.0" encoding="utf-8"?>-->
 <!--<ScrollView-->
