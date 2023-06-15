@@ -13,7 +13,7 @@
             android:title="Home"/>
 
         <item
-            android:id="@+id/nav_settings"
+            android:id="@+id/nav_reminder"
             android:icon="@drawable/baseline_timelapse_24"
             android:title="Reminder"/>
 

@@ -374,12 +374,15 @@ public class SalesFirstPage extends AppCompatActivity implements NavigationView.
                 startActivity(homeIntent);
                 break;
 
-            case R.id.nav_settings:
-                Toast.makeText(this, "settings!", Toast.LENGTH_SHORT).show();
+            case R.id.nav_reminder:
+                Toast.makeText(this, "Reminder!", Toast.LENGTH_SHORT).show();
                 //getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new SettingsFragment()).commit();
                 break;
 
             case R.id.nav_report:
+                startActivity(new Intent(SalesFirstPage.this, Report.class));
+                drawerLayout.closeDrawer(GravityCompat.START);
+                //return true;
                 Toast.makeText(this, "report!", Toast.LENGTH_SHORT).show();
                 //getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ShareFragment()).commit();
                 break;

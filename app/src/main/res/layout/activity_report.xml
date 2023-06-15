@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    tools:context=".Report">
+
+    <!-- Filter Buttons -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btnSpecificDate"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Specific Date"
+            android:layout_weight="1"
+            android:layout_margin="4dp" />
+
+        <Button
+            android:id="@+id/btnDateRange"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Date Range"
+            android:layout_weight="1"
+            android:layout_margin="4dp" />
+
+        <Button
+            android:id="@+id/btnToday"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Today"
+            android:layout_weight="1"
+            android:layout_margin="4dp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btnThisWeek"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="This Week"
+            android:layout_weight="1"
+            android:layout_margin="4dp" />
+
+        <Button
+            android:id="@+id/btnThisMonth"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="This Month"
+            android:layout_weight="1"
+            android:layout_margin="4dp" />
+
+        <Button
+            android:id="@+id/btnCustomFilter"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Custom Filter"
+            android:layout_weight="1"
+            android:layout_margin="4dp" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tvReport"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:textColor="@android:color/black"
+        android:padding="16dp" />
+
+    <!-- Add your report content here -->
+
+</LinearLayout>
