@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#CDDC39"
-    tools:context=".LoanDataUpload">
+    android:background="#8692F7"
+    tools:context=".LoanUpload">
 
 
     <!--    <EditText-->
@@ -37,7 +37,7 @@
         android:layout_alignParentEnd="true"
         android:layout_marginTop="37dp"
         android:layout_marginEnd="119dp"
-        android:text="Loan"
+        android:text="Loan Details"
         android:textColor="@color/violet"
         android:textSize="25sp"
         android:textStyle="bold"
@@ -78,7 +78,7 @@
         tools:layout_editor_absoluteY="172dp" />
 
     <EditText
-        android:id="@+id/billno"
+        android:id="@+id/billno1"
         android:layout_width="259dp"
         android:layout_height="48dp"
         android:layout_below="@+id/Date"
@@ -135,7 +135,7 @@
         android:id="@+id/name"
         android:layout_width="259dp"
         android:layout_height="48dp"
-        android:layout_below="@+id/billno"
+        android:layout_below="@+id/billno1"
         android:layout_alignParentEnd="true"
         android:layout_marginTop="41dp"
         android:layout_marginEnd="72dp"

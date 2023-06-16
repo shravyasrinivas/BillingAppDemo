@@ -74,7 +74,7 @@ public class LoanFirstPage extends AppCompatActivity implements NavigationView.O
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_loan_first_page);
 
-        Toolbar toolbar = findViewById(R.id.toolbar);
+        toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         drawerLayout = findViewById(R.id.drawer_layout);
@@ -105,7 +105,7 @@ public class LoanFirstPage extends AppCompatActivity implements NavigationView.O
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), LoanDataUpload.class);
+                Intent intent = new Intent(getApplicationContext(), LoanUpload.class);
                 startActivity(intent);
                 finish();
             }
@@ -380,7 +380,7 @@ public class LoanFirstPage extends AppCompatActivity implements NavigationView.O
                 break;
 
             case R.id.nav_report:
-                startActivity(new Intent(LoanFirstPage.this, LoanReport.class));
+                startActivity(new Intent(LoanFirstPage.this, Report.class));
                 drawerLayout.closeDrawer(GravityCompat.START);
                 //return true;
                 Toast.makeText(this, "report!", Toast.LENGTH_SHORT).show();
@@ -868,67 +868,3 @@ public class LoanFirstPage extends AppCompatActivity implements NavigationView.O
 ////
 ////
 ////
-
-//
-//package com.example.BillingDemo;
-//
-//import androidx.annotation.NonNull;
-//import androidx.appcompat.app.AlertDialog;
-//import androidx.appcompat.app.AppCompatActivity;
-//import androidx.recyclerview.widget.ItemTouchHelper;
-//import androidx.recyclerview.widget.LinearLayoutManager;
-//import androidx.recyclerview.widget.RecyclerView;
-//
-//import android.content.DialogInterface;
-//import android.content.Intent;
-//import android.os.Bundle;
-//import android.view.Menu;
-//import android.view.MenuItem;
-//import android.view.View;
-//import android.widget.SearchView;
-//import android.widget.Toast;
-//
-//import com.google.android.gms.tasks.OnFailureListener;
-//import com.google.android.gms.tasks.OnSuccessListener;
-//import com.google.android.material.floatingactionbutton.FloatingActionButton;
-//import com.google.firebase.database.DataSnapshot;
-//import com.google.firebase.database.DatabaseError;
-//import com.google.firebase.database.DatabaseReference;
-//import com.google.firebase.database.FirebaseDatabase;
-//import com.google.firebase.database.ValueEventListener;
-//
-//import java.util.ArrayList;
-//
-//public class LoanFirstPage extends AppCompatActivity {
-//
-//    RecyclerView recyclerView;
-//    ArrayList<UserHelperJava> list;
-//    DatabaseReference databaseReference;
-//    MyAdapter adapter;
-//    FloatingActionButton fab;
-//
-//    @Override
-//    public void onBackPressed() {
-//        super.onBackPressed();
-//        startActivity(new Intent(LoanFirstPage.this, MainActivity.class));
-//        finish();
-//    }
-//
-//    @Override
-//    protected void onCreate(Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-//        setContentView(R.layout.activity_loan_first_page);
-//
-//        recyclerView = findViewById(R.id.loanrecycleview);
-//        fab = findViewById(R.id.loanfab);
-//
-//        fab.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent intent = new Intent(getApplicationContext(), uploaddata.class);
-//                startActivity(intent);
-//                finish();
-//            }
-//        });
-//
-//

@@ -15,6 +15,9 @@
         android:theme="@style/Theme.Material3.Light"
         tools:targetApi="31">
         <activity
+            android:name=".LoanUpload"
+            android:exported="true" />
+        <activity
             android:name=".LoanReport"
             android:exported="true" />
         <activity
@@ -25,7 +28,8 @@
             android:exported="false" />
         <activity
             android:name=".LoanFirstPage"
-            android:exported="false" />
+            android:exported="true"
+            android:theme="@style/Theme.Material3.Light.NoActionBar" />
         <activity
             android:name=".SalesFirstPage"
             android:exported="true"

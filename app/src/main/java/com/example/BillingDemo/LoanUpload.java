@@ -11,15 +11,17 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.Toast;
+
+import com.example.BillingDemo.databinding.ActivityLoanUploadBinding;
 import com.example.BillingDemo.databinding.ActivityUploaddataBinding;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-public class LoanDataUpload extends AppCompatActivity {
+public class LoanUpload extends AppCompatActivity {
 
-    ActivityUploaddataBinding binding;
+    ActivityLoanUploadBinding binding;
     String billno, name, place, amount, balance, selectedDate, duedate;
 
     FirebaseDatabase db;
@@ -28,7 +30,7 @@ public class LoanDataUpload extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        startActivity(new Intent(LoanDataUpload.this, LoanFirstPage.class));
+        startActivity(new Intent(LoanUpload.this, LoanFirstPage.class));
         finish();
     }
 
@@ -36,7 +38,7 @@ public class LoanDataUpload extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = ActivityUploaddataBinding.inflate(getLayoutInflater());
+        binding = ActivityLoanUploadBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         binding.Date.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -57,7 +59,7 @@ public class LoanDataUpload extends AppCompatActivity {
         binding.save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                billno = binding.billno.getText().toString();
+                billno = binding.billno1.getText().toString();
                 name = binding.name.getText().toString();
                 place = binding.place.getText().toString();
                 amount = binding.amount.getText().toString();
@@ -76,14 +78,14 @@ public class LoanDataUpload extends AppCompatActivity {
                     reference.child(billno).setValue(users).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
-                            binding.billno.setText("");
+                            binding.billno1.setText("");
                             binding.name.setText("");
                             binding.place.setText("");
                             binding.amount.setText("");
                             binding.balance.setText("");
                             binding.Date.setText("");
                             binding.duedate.setText("");
-                            Toast.makeText(LoanDataUpload.this, "Successfully Uploaded", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(LoanUpload.this, "Successfully Uploaded", Toast.LENGTH_SHORT).show();
                         }
 
                     });
