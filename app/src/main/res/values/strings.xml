@@ -19,7 +19,7 @@
     <string name="second_fragment_label">Second Fragment</string>
     <string name="next">Next</string>
     <string name="previous">Previous</string>
-
+    <string name="sales_info">Number of Sales: %1$d\nTotal Amount: %2$.2f\nTotal Balance: %3$.2f</string>
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="days_pending">%d</string>
@@ -31,5 +31,11 @@
     <string name="this_month">This_month</string>
     <string name="specific_date">Specific date</string>
     <string name="select_date_range">"Select Date "</string>
+    <string name="current_month">Sales in the current month </string>
+    <string name="dat_range">Sales in the date range </string>
+    <string name="current_week">Sales in the current week</string>
+    <string name="today">Sales today</string>
+    <string name="sp_date">"Sales before "</string>
+    <string name="filter_all">Sales of all customers</string>
 
 </resources>

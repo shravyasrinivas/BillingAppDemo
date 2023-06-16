@@ -1,5 +1,5 @@
-
 package com.example.BillingDemo;
+
 import java.util.Calendar;
 import java.util.Date;
 import androidx.annotation.NonNull;
@@ -28,7 +28,7 @@ public class LoanDataUpload extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        startActivity(new Intent(LoanDataUpload.this, LoanFirstPage.class));
+        startActivity(new Intent(LoanDataUpload.this, SalesFirstPage.class));
         finish();
     }
 
@@ -70,7 +70,7 @@ public class LoanDataUpload extends AppCompatActivity {
                     UserHelperJava users = new UserHelperJava(selectedDate, billno, name, place, amount, balance, duedate);
                     db = FirebaseDatabase.getInstance();
 
-                    reference = db.getReference("Loan");
+                    reference = db.getReference("Loans");
 
 
                     reference.child(billno).setValue(users).addOnCompleteListener(new OnCompleteListener<Void>() {
