@@ -1,5 +1,6 @@
 package com.example.BillingDemo;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import androidx.annotation.NonNull;
@@ -9,6 +10,7 @@ import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.Toast;
 
@@ -22,10 +24,13 @@ import com.google.firebase.database.FirebaseDatabase;
 public class LoanUpload extends AppCompatActivity {
 
     ActivityLoanUploadBinding binding;
-    String billno, name, place, amount, balance, selectedDate, duedate;
+    String billno, name, place, amount, balance, selectedDate, duedate,loanType;
 
     FirebaseDatabase db;
     DatabaseReference reference;
+
+    private ArrayList<String> spinnerItems;
+    private ArrayAdapter<String> spinnerAdapter;
 
     @Override
     public void onBackPressed() {
@@ -55,6 +60,13 @@ public class LoanUpload extends AppCompatActivity {
 
         });
 
+        spinnerItems = new ArrayList<>();
+        spinnerItems.add("SR");
+        spinnerItems.add("SG");
+
+
+        spinnerAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, spinnerItems);
+        binding.loanTypeSpinner.setAdapter(spinnerAdapter);
 
         binding.save.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -66,10 +78,11 @@ public class LoanUpload extends AppCompatActivity {
                 balance = binding.balance.getText().toString();
                 selectedDate = binding.Date.getText().toString();
                 duedate = binding.duedate.getText().toString();
+                loanType = binding.loanTypeSpinner.getSelectedItem().toString();
 
 
                 if (!billno.isEmpty() && !name.isEmpty() && !place.isEmpty() && !amount.isEmpty() && !balance.isEmpty()) {
-                    UserHelperJava users = new UserHelperJava(selectedDate, billno, name, place, amount, balance, duedate);
+                    UserHelperJava2 users = new UserHelperJava2(selectedDate, billno, name, place, amount, balance, duedate,loanType);
                     db = FirebaseDatabase.getInstance();
 
                     reference = db.getReference("Loans");
@@ -85,6 +98,7 @@ public class LoanUpload extends AppCompatActivity {
                             binding.balance.setText("");
                             binding.Date.setText("");
                             binding.duedate.setText("");
+                            binding.loanTypeSpinner.setSelection(0);
                             Toast.makeText(LoanUpload.this, "Successfully Uploaded", Toast.LENGTH_SHORT).show();
                         }
 

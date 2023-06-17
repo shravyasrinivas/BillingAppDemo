@@ -55,9 +55,9 @@ public class LoanFirstPage extends AppCompatActivity implements NavigationView.O
     private Toolbar toolbar;
 
     RecyclerView recyclerView;
-    ArrayList<UserHelperJava> list;
+    ArrayList<UserHelperJava2> list;
     DatabaseReference databaseReference;
-    MyAdapter adapter;
+    MyAdapter2 adapter;
     FloatingActionButton fab;
 
     @Override
@@ -121,10 +121,10 @@ public class LoanFirstPage extends AppCompatActivity implements NavigationView.O
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 list.clear();
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    UserHelperJava user = snapshot.getValue(UserHelperJava.class);
+                    UserHelperJava2 user = snapshot.getValue(UserHelperJava2.class);
                     list.add(user);
                 }
-                adapter = new MyAdapter(LoanFirstPage.this, list);
+                adapter = new MyAdapter2(LoanFirstPage.this, list);
                 recyclerView.setAdapter(adapter);
 
 //                recyclerView.setAdapter(adapter);
@@ -146,7 +146,7 @@ public class LoanFirstPage extends AppCompatActivity implements NavigationView.O
             @Override
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
                 int swipedPosition = viewHolder.getAdapterPosition();
-                UserHelperJava swipedUser = list.get(swipedPosition);
+                UserHelperJava2 swipedUser = list.get(swipedPosition);
                 String swipedUserKey = swipedUser.getBillno();
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(LoanFirstPage.this);
@@ -255,8 +255,8 @@ public class LoanFirstPage extends AppCompatActivity implements NavigationView.O
         String endDateString = dateFormat.format(endDate);
 
         // Filter the list based on the date range
-        ArrayList<UserHelperJava> filteredList = new ArrayList<>();
-        for (UserHelperJava user : list) {
+        ArrayList<UserHelperJava2> filteredList = new ArrayList<>();
+        for (UserHelperJava2 user : list) {
             try {
                 Date dueDate = dateFormat.parse(user.getDuedate());
                 if (dueDate.after(startDate) && dueDate.before(endDate)) {
@@ -283,8 +283,8 @@ public class LoanFirstPage extends AppCompatActivity implements NavigationView.O
         String todayString = dateFormat.format(today);
 
         // Filter the list based on today's date
-        ArrayList<UserHelperJava> filteredList = new ArrayList<>();
-        for (UserHelperJava user : list) {
+        ArrayList<UserHelperJava2> filteredList = new ArrayList<>();
+        for (UserHelperJava2 user : list) {
             if (user.getDuedate().equals(todayString)) {
                 filteredList.add(user);
             }
@@ -309,8 +309,8 @@ public class LoanFirstPage extends AppCompatActivity implements NavigationView.O
         String endDateString = dateFormat.format(endDate);
 
         // Filter the list based on the date range
-        ArrayList<UserHelperJava> filteredList = new ArrayList<>();
-        for (UserHelperJava user : list) {
+        ArrayList<UserHelperJava2> filteredList = new ArrayList<>();
+        for (UserHelperJava2 user : list) {
             try {
                 Date dueDate = dateFormat.parse(user.getDuedate());
                 if (dueDate.after(startDate) && dueDate.before(endDate)) {
@@ -343,8 +343,8 @@ public class LoanFirstPage extends AppCompatActivity implements NavigationView.O
                 String selectedDateString = dateFormat.format(selectedDate);
 
                 // Filter the list based on the selected date
-                ArrayList<UserHelperJava> filteredList = new ArrayList<>();
-                for (UserHelperJava user : list) {
+                ArrayList<UserHelperJava2> filteredList = new ArrayList<>();
+                for (UserHelperJava2 user : list) {
                     try {
                         Date dueDate = dateFormat.parse(user.getDuedate());
                         if (dueDate.before(selectedDate)) {
