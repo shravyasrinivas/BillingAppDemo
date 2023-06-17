@@ -41,5 +41,10 @@
     <item>SR</item>
     <item>SG</item>
     </string-array>
+    <string-array name="metal_types">
+        <item>Gold</item>
+        <item>Silver</item>
+    </string-array>
+
 
 </resources>
