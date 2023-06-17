@@ -10,13 +10,13 @@ public class UserHelperJava2 {
     String date, duedate;
     private long duedateTimestamp; // New field for storing timestamp value of the due date
 
-     // New field for loan type
+     String loanType; // New field for loan type
 
     public UserHelperJava2() {
 
     }
 
-    public UserHelperJava2(String date, String billno, String name, String place, String amount, String balance, String duedate) {
+    public UserHelperJava2(String date, String billno, String name, String place, String amount, String balance, String duedate,String loanType) {
         this.date = date;
         this.billno = billno;
         this.name = name;
@@ -24,6 +24,7 @@ public class UserHelperJava2 {
         this.amount = amount;
         this.balance = balance;
         this.duedate = duedate;
+        this.loanType= loanType;
 
         // Calculate and set the timestamp value of the due date
         try {
@@ -35,6 +36,13 @@ public class UserHelperJava2 {
         }
     }
 
+    public String getLoanType() {
+        return loanType;
+    }
+
+    public void setLoanType(String loanType) {
+        this.loanType = loanType;
+    }
     public String getBillno() {
         return billno;
     }

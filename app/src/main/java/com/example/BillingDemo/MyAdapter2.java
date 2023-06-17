@@ -95,12 +95,16 @@ public class MyAdapter2 extends RecyclerView.Adapter<MyAdapter2.MyViewHolder> im
         EditText edtPlace = dialog.findViewById(R.id.editPlace);
         EditText edtAmt = dialog.findViewById(R.id.editAmt);
         EditText edtBal = dialog.findViewById(R.id.editBal);
-
-
-
         Button btnAction = dialog.findViewById(R.id.btnAction);
         TextView edtDate = dialog.findViewById(R.id.editDate);
         TextView edtDueDate=dialog.findViewById(R.id.editdueDate);
+
+        Spinner edtloanTypeSpinner=dialog.findViewById(R.id.edtloanTypeSpinner);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(context, R.array.loan_types, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        edtloanTypeSpinner.setAdapter(adapter);
+
+
         edtName.setText(user.getName());
         edtBillNumber.setText(user.getBillno());
         edtPlace.setText(user.getPlace());
@@ -108,7 +112,7 @@ public class MyAdapter2 extends RecyclerView.Adapter<MyAdapter2.MyViewHolder> im
         edtBal.setText(user.getBalance());
         edtDate.setText(user.getDate());
         edtDueDate.setText(user.getDuedate());
-        //spinnerLoanType.setSelection(user.getLoanType());
+        edtloanTypeSpinner.setSelection(adapter.getPosition(user.getLoanType()));
 
         DatabaseReference userRef = databaseReference.child(user.getBillno());
         ValueEventListener valueEventListener = new ValueEventListener() {
@@ -123,7 +127,7 @@ public class MyAdapter2 extends RecyclerView.Adapter<MyAdapter2.MyViewHolder> im
                     edtBal.setText(updatedData.getBalance());
                     edtDate.setText(updatedData.getDate());
                     edtDueDate.setText(updatedData.getDuedate());// Update the date
-                    //edtLoanType.setText(updatedData.getLoanType());
+                    edtloanTypeSpinner.setSelection(adapter.getPosition(updatedData.getLoanType()));
                 }
             }
 
@@ -143,6 +147,7 @@ public class MyAdapter2 extends RecyclerView.Adapter<MyAdapter2.MyViewHolder> im
                 String balance = edtBal.getText().toString().trim();
                 String date = edtDate.getText().toString().trim();
                 String duedate = edtDueDate.getText().toString().trim();
+                String loanType = edtloanTypeSpinner.getSelectedItem().toString().trim();
 
 
                 // Get the updated date
@@ -151,7 +156,7 @@ public class MyAdapter2 extends RecyclerView.Adapter<MyAdapter2.MyViewHolder> im
                     return;
                 }
 
-                UserHelperJava2 updatedUser = new UserHelperJava2(date, billno, name, place, amount, balance,duedate);
+                UserHelperJava2 updatedUser = new UserHelperJava2(date, billno, name, place, amount, balance,duedate,loanType);
                 list.set(holder.getAdapterPosition(), updatedUser);
                 notifyItemChanged(holder.getAdapterPosition());
 

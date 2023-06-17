@@ -77,9 +77,33 @@
         tools:layout_editor_absoluteX="101dp"
         tools:layout_editor_absoluteY="172dp" />
 
+    <Spinner
+        android:id="@+id/loanTypeSpinner"
+        android:layout_width="100dp"
+        android:layout_height="48dp"
+        android:layout_below="@+id/Date"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="41dp"
+        android:layout_marginEnd="230dp"
+        android:layout_toStartOf="@+id/billno1"
+        android:layout_weight="1"
+        android:background="@drawable/rounded_button"
+        android:dropDownVerticalOffset="48dp"
+        android:ems="10"
+        android:entries="@array/loan_types"
+        android:padding="10dp"
+        android:spinnerMode="dropdown"
+        android:textColor="#090908"
+        android:textColorHint="#AAAA83"
+        app:layout_constraintHeight_default="wrap"
+        app:layout_constraintHorizontal_bias="0.348"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <EditText
         android:id="@+id/billno1"
-        android:layout_width="259dp"
+        android:layout_width="150dp"
         android:layout_height="48dp"
         android:layout_below="@+id/Date"
         android:layout_alignParentEnd="true"
@@ -179,7 +203,7 @@
     <EditText
         android:id="@+id/amount"
         android:layout_width="124dp"
-        android:layout_height="45dp"
+        android:layout_height="48dp"
         android:layout_below="@+id/place"
         android:layout_marginTop="41dp"
         android:layout_marginEnd="8dp"
@@ -204,7 +228,7 @@
     <EditText
         android:id="@+id/balance"
         android:layout_width="124dp"
-        android:layout_height="45dp"
+        android:layout_height="48dp"
         android:layout_below="@+id/place"
         android:layout_alignParentEnd="true"
         android:layout_marginTop="41dp"

@@ -37,5 +37,9 @@
     <string name="today">Sales today</string>
     <string name="sp_date">"Sales before "</string>
     <string name="filter_all">Sales of all customers</string>
+    <string-array name="loan_types">
+    <item>SR</item>
+    <item>SG</item>
+    </string-array>
 
 </resources>
