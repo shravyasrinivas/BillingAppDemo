@@ -10,6 +10,7 @@ import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.Toast;
@@ -24,13 +25,14 @@ import com.google.firebase.database.FirebaseDatabase;
 public class LoanUpload extends AppCompatActivity {
 
     ActivityLoanUploadBinding binding;
-    String billno, name, place, amount, balance, selectedDate, duedate,loanType,metalType;
+    String billno, name, place, amount, balance, selectedDate, duedate,loanType,metalType,jewelType;
 
     FirebaseDatabase db;
     DatabaseReference reference;
 
-    private ArrayList<String> spinnerItems,spinnerItems1;
-    private ArrayAdapter<String> spinnerAdapter,spinnerAdapter1;
+    private ArrayList<String> spinnerItems, spinnerItems1;
+    private ArrayList<String> goldJewelItems, silverJewelItems;
+    private ArrayAdapter<String> spinnerAdapter, spinnerAdapter1, jewelAdapter;
 
     @Override
     public void onBackPressed() {
@@ -68,12 +70,50 @@ public class LoanUpload extends AppCompatActivity {
         spinnerItems1.add("Gold");
         spinnerItems1.add("Silver");
 
-
         spinnerAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, spinnerItems);
         binding.loanTypeSpinner.setAdapter(spinnerAdapter);
 
         spinnerAdapter1 = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, spinnerItems1);
         binding.metalSpinner.setAdapter(spinnerAdapter1);
+
+        goldJewelItems = new ArrayList<>();
+        goldJewelItems.add("Jewel 1");
+        goldJewelItems.add("Jewel 2");
+        goldJewelItems.add("Jewel 3");
+        goldJewelItems.add("Jewel 4");
+        goldJewelItems.add("Jewel 5");
+
+        silverJewelItems = new ArrayList<>();
+        silverJewelItems.add("Jewel A");
+        silverJewelItems.add("Jewel B");
+        silverJewelItems.add("Jewel C");
+        silverJewelItems.add("Jewel D");
+        silverJewelItems.add("Jewel E");
+
+        jewelAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item);
+        binding.jewelSpinner.setAdapter(jewelAdapter);
+
+        binding.metalSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String selectedMetalType = parent.getItemAtPosition(position).toString();
+
+                if (selectedMetalType.equals("Gold")) {
+                    jewelAdapter.clear();
+                    jewelAdapter.addAll(goldJewelItems);
+                } else if (selectedMetalType.equals("Silver")) {
+                    jewelAdapter.clear();
+                    jewelAdapter.addAll(silverJewelItems);
+                }
+
+                jewelAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                // Handle when nothing is selected
+            }
+        });
 
         binding.save.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -87,6 +127,7 @@ public class LoanUpload extends AppCompatActivity {
                 duedate = binding.duedate.getText().toString();
                 loanType = binding.loanTypeSpinner.getSelectedItem().toString();
                 metalType = binding.metalSpinner.getSelectedItem().toString();
+                jewelType = binding.jewelSpinner.getSelectedItem().toString();
 
 
                 if (!billno.isEmpty() && !name.isEmpty() && !place.isEmpty() && !amount.isEmpty() && !balance.isEmpty()) {
@@ -108,6 +149,7 @@ public class LoanUpload extends AppCompatActivity {
                             binding.duedate.setText("");
                             binding.loanTypeSpinner.setSelection(0);
                             binding.metalSpinner.setSelection(0);
+                            binding.jewelSpinner.setSelection(0);
 
                             Toast.makeText(LoanUpload.this, "Successfully Uploaded", Toast.LENGTH_SHORT).show();
                         }

@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -109,6 +110,9 @@ public class MyAdapter2 extends RecyclerView.Adapter<MyAdapter2.MyViewHolder> im
         adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         edtmetalSpinner.setAdapter(adapter1);
 
+        Spinner edtjewelSpinner = dialog.findViewById(R.id.edtjewelSpinner);
+
+
 
         edtName.setText(user.getName());
         edtBillNumber.setText(user.getBillno());
@@ -119,6 +123,7 @@ public class MyAdapter2 extends RecyclerView.Adapter<MyAdapter2.MyViewHolder> im
         edtDueDate.setText(user.getDuedate());
         edtloanTypeSpinner.setSelection(adapter.getPosition(user.getLoanType()));
         edtmetalSpinner.setSelection(adapter1.getPosition(user.getMetalType()));
+
 
         DatabaseReference userRef = databaseReference.child(user.getBillno());
         ValueEventListener valueEventListener = new ValueEventListener() {
@@ -188,6 +193,60 @@ public class MyAdapter2 extends RecyclerView.Adapter<MyAdapter2.MyViewHolder> im
                 dialog.show();
             }
         });
+
+        // Set initial jewel spinner based on the user's data
+        String metalType = user.getMetalType();
+
+        if (metalType != null) {
+            Toast.makeText(context, "Empty", Toast.LENGTH_SHORT).show();
+
+
+            if (metalType.equals("Gold")) {
+                ArrayAdapter<CharSequence> jewelAdapter1 = ArrayAdapter.createFromResource(
+                        context,
+                        R.array.gold_jewel_types,
+                        android.R.layout.simple_spinner_item
+                );
+                jewelAdapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                edtjewelSpinner.setAdapter(jewelAdapter1);
+            } else if (metalType.equals("Silver")) {
+                ArrayAdapter<CharSequence> jewelAdapter2 = ArrayAdapter.createFromResource(
+                        context,
+                        R.array.silver_jewel_types,
+                        android.R.layout.simple_spinner_item
+                );
+                jewelAdapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                edtjewelSpinner.setAdapter(jewelAdapter2);
+            }
+        }
+//        holder.jewelSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+//            @Override
+//            public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
+//                String selectedMetalType = (String) adapterView.getItemAtPosition(position);
+//                ArrayAdapter<CharSequence> jewelAdapter;
+//                if (selectedMetalType.equals("Gold")) {
+//                    jewelAdapter = ArrayAdapter.createFromResource(
+//                            context,
+//                            R.array.gold_jewel_types,
+//                            android.R.layout.simple_spinner_item
+//                    );
+//                } else {
+//                    jewelAdapter = ArrayAdapter.createFromResource(
+//                            context,
+//                            R.array.silver_jewel_types,
+//                            android.R.layout.simple_spinner_item
+//                    );
+//                }
+//                jewelAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//                edtjewelSpinner.setAdapter(jewelAdapter);
+//            }
+//
+//            @Override
+//            public void onNothingSelected(AdapterView<?> adapterView) {
+//                // Do nothing
+//            }
+//        });
+
 
 
         edtDate.setOnClickListener(new View.OnClickListener() {
