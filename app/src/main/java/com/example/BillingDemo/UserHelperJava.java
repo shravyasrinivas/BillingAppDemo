@@ -7,21 +7,25 @@ import java.util.concurrent.TimeUnit;
 
 public class UserHelperJava {
   String billno, name, place, amount, balance;
-   String date, duedate;
+   String date, duedate,fatherName,aadharNum,phoneNum;
     private long duedateTimestamp; // New field for storing timestamp value of the due date
 
     public UserHelperJava() {
 
     }
 
-    public UserHelperJava(String date, String billno, String name, String place, String amount, String balance, String duedate) {
+    public UserHelperJava(String date, String billno, String name, String fatherName,String aadharNum,String phoneNum, String place, String amount, String balance, String duedate) {
         this.date = date;
         this.billno = billno;
         this.name = name;
+        this.fatherName=fatherName;
+        this.aadharNum=aadharNum;
+        this.phoneNum=phoneNum;
         this.place = place;
         this.amount = amount;
         this.balance = balance;
         this.duedate = duedate;
+
 
         // Calculate and set the timestamp value of the due date
         try {
@@ -47,6 +51,30 @@ public class UserHelperJava {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getFatherName() {
+        return fatherName;
+    }
+
+    public void setFatherName(String fatherName) {
+        this.fatherName = fatherName;
+    }
+
+    public String getAadharNum() {
+        return aadharNum;
+    }
+
+    public void setAadharNum(String aadharNum) {
+        this.aadharNum = aadharNum;
+    }
+
+    public String getPhoneNum() {
+        return phoneNum;
+    }
+
+    public void setPhoneNum(String phoneNum) {
+        this.phoneNum = phoneNum;
     }
 
     public String getPlace() {

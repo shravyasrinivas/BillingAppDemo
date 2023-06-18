@@ -46,6 +46,30 @@
         android:padding="11dp"
         android:id="@+id/editName"
         android:inputType="text"/>
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Father's Name"
+        android:background="#fff"
+        android:padding="11dp"
+        android:id="@+id/editFatherName"
+        android:inputType="text"/>
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Aadhar Number"
+        android:background="#fff"
+        android:padding="11dp"
+        android:id="@+id/editAadharNum"
+        android:inputType="number"/>
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Phone Number"
+        android:background="#fff"
+        android:padding="11dp"
+        android:id="@+id/editPhoneNum"
+        android:inputType="text"/>
 
     <EditText
         android:layout_width="match_parent"

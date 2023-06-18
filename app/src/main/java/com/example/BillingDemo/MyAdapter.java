@@ -106,13 +106,26 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> impl
                         "        <th>Date</th>\n" +
                         "        <td>" + user.getDate() + "</td>\n" +
                         "    </tr>\n" +
+
+                        "    <tr>\n" +
+                        "        <th>Bill No</th>\n" +
+                        "        <td>" + user.getBillno() + "</td>\n" +
+                        "    </tr>\n" +
                         "    <tr>\n" +
                         "        <th>Customer Name</th>\n" +
                         "        <td>" + user.getName() + "</td>\n" +
                         "    </tr>\n" +
                         "    <tr>\n" +
-                        "        <th>Bill No</th>\n" +
-                        "        <td>" + user.getBillno() + "</td>\n" +
+                        "        <th>Father's Name</th>\n" +
+                        "        <td>" + user.getFatherName() + "</td>\n" +
+                        "    </tr>\n" +
+                        "    <tr>\n" +
+                        "        <th>Aadhar Number</th>\n" +
+                        "        <td>" + user.getAadharNum() + "</td>\n" +
+                        "    </tr>\n" +
+                        "    <tr>\n" +
+                        "        <th>Phone Number</th>\n" +
+                        "        <td>" + user.getPhoneNum() + "</td>\n" +
                         "    </tr>\n" +
                         "    <tr>\n" +
                         "        <th>Place</th>\n" +
@@ -161,6 +174,9 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> impl
         databaseReference = FirebaseDatabase.getInstance().getReference("Sales");
         dialog.setContentView(R.layout.app_update_sales);
         EditText edtName = dialog.findViewById(R.id.editName);
+        EditText edtFatherName = dialog.findViewById(R.id.editFatherName);
+        EditText edtAadharNum = dialog.findViewById(R.id.editAadharNum);
+        EditText edtPhoneNum = dialog.findViewById(R.id.editPhoneNum);
         EditText edtBillNumber = dialog.findViewById(R.id.editBillNum);
         EditText edtPlace = dialog.findViewById(R.id.editPlace);
         EditText edtAmt = dialog.findViewById(R.id.editAmt);
@@ -170,6 +186,9 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> impl
         TextView edtDate = dialog.findViewById(R.id.editDate);
         TextView edtDueDate=dialog.findViewById(R.id.editdueDate);
         edtName.setText(user.getName());
+        edtFatherName.setText(user.getFatherName());
+        edtAadharNum.setText(user.getAadharNum());
+        edtPhoneNum.setText(user.getPhoneNum());
         edtBillNumber.setText(user.getBillno());
         edtPlace.setText(user.getPlace());
         edtAmt.setText(user.getAmount());
@@ -183,6 +202,9 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> impl
                 UserHelperJava updatedData = snapshot.getValue(UserHelperJava.class);
                 if (updatedData != null) {
                     edtName.setText(updatedData.getName());
+                    edtFatherName.setText(updatedData.getFatherName());
+                    edtAadharNum.setText(updatedData.getAadharNum());
+                    edtPhoneNum.setText(updatedData.getPhoneNum());
                     edtBillNumber.setText(updatedData.getBillno());
                     edtPlace.setText(updatedData.getPlace());
                     edtAmt.setText(updatedData.getAmount());
@@ -202,6 +224,9 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> impl
             @Override
             public void onClick(View view) {
                 String name = edtName.getText().toString().trim();
+                String fatherName = edtFatherName.getText().toString().trim();
+                String aadharNum = edtAadharNum.getText().toString().trim();
+                String phoneNum = edtPhoneNum.getText().toString().trim();
                 String billno = edtBillNumber.getText().toString().trim();
                 String place = edtPlace.getText().toString().trim();
                 String amount = edtAmt.getText().toString().trim();
@@ -209,12 +234,12 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> impl
                 String date = edtDate.getText().toString().trim();
                 String duedate = edtDueDate.getText().toString().trim();
                 // Get the updated date
-                if (name.isEmpty() || billno.isEmpty() || place.isEmpty() || amount.isEmpty() || balance.isEmpty() || date.isEmpty() || duedate.isEmpty()) {
+                if (name.isEmpty() || billno.isEmpty() || place.isEmpty() || amount.isEmpty() || balance.isEmpty() || date.isEmpty() || duedate.isEmpty() || fatherName.isEmpty() || aadharNum.isEmpty() || phoneNum.isEmpty()) {
                     Toast.makeText(context, "Please fill in all the fields", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
-                UserHelperJava updatedUser = new UserHelperJava(date, billno, name, place, amount, balance,duedate);
+                UserHelperJava updatedUser = new UserHelperJava(date, billno, name,fatherName,aadharNum,phoneNum, place, amount, balance,duedate);
                 list.set(holder.getAdapterPosition(), updatedUser);
                 notifyItemChanged(holder.getAdapterPosition());
 

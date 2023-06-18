@@ -1,9 +1,12 @@
 package com.example.BillingDemo;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.concurrent.TimeUnit;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.telephony.SmsManager;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,16 +16,19 @@ import android.widget.Toast;
 import com.example.BillingDemo.databinding.ActivityUploaddataBinding;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class uploaddata extends AppCompatActivity {
 
     ActivityUploaddataBinding binding;
-    String billno, name, place, amount, balance, selectedDate, duedate;
+    String billno, name, place, amount, balance, selectedDate, duedate,fatherName,aadharNum,phoneNum;
 
     FirebaseDatabase db;
     DatabaseReference reference;
+
+    private static final long CHECK_INTERVAL = TimeUnit.DAYS.toMillis(1); // Interval to check daysPending (1 day)
 
     @Override
     public void onBackPressed() {
@@ -58,6 +64,9 @@ public class uploaddata extends AppCompatActivity {
             public void onClick(View v) {
                 billno = binding.billno.getText().toString();
                 name = binding.name.getText().toString();
+                fatherName = binding.fatherName.getText().toString();
+                aadharNum = binding.aadharNumber.getText().toString();
+                phoneNum = binding.phoneNumber.getText().toString();
                 place = binding.place.getText().toString();
                 amount = binding.amount.getText().toString();
                 balance = binding.balance.getText().toString();
@@ -66,7 +75,7 @@ public class uploaddata extends AppCompatActivity {
 
 
                 if (!billno.isEmpty() && !name.isEmpty() && !place.isEmpty() && !amount.isEmpty() && !balance.isEmpty()) {
-                    UserHelperJava users = new UserHelperJava(selectedDate, billno, name, place, amount, balance, duedate);
+                    UserHelperJava users = new UserHelperJava(selectedDate, billno, name,fatherName,aadharNum,phoneNum ,place, amount, balance, duedate);
                     db = FirebaseDatabase.getInstance();
 
                     reference = db.getReference("Sales");
@@ -77,12 +86,18 @@ public class uploaddata extends AppCompatActivity {
                         public void onComplete(@NonNull Task<Void> task) {
                             binding.billno.setText("");
                             binding.name.setText("");
+                            binding.fatherName.setText("");
                             binding.place.setText("");
+                            binding.aadharNumber.setText("");
+                            binding.phoneNumber.setText("");
                             binding.amount.setText("");
                             binding.balance.setText("");
                             binding.Date.setText("");
                             binding.duedate.setText("");
+
+
                             Toast.makeText(uploaddata.this, "Successfully Uploaded", Toast.LENGTH_SHORT).show();
+
                         }
 
                     });
@@ -120,6 +135,7 @@ public class uploaddata extends AppCompatActivity {
         // Show the date picker dialog for selecting the due date
         datePickerDialog.show();
     }
+
 
 }
 //    public void showDatePicker(){
