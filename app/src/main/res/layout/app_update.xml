@@ -63,6 +63,20 @@
         android:id="@+id/editPlace"
         android:hint="Place"
         android:inputType="text"/>
+    <Spinner
+        android:id="@+id/edtmetalSpinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#fff"
+        android:padding="11dp"
+        android:hint="Metal Type"/>
+    <Spinner
+        android:id="@+id/edtjewelSpinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#fff"
+        android:padding="11dp"
+        android:hint="Jewel Name"/>
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

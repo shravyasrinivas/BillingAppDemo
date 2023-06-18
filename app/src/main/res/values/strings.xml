@@ -41,5 +41,26 @@
     <item>SR</item>
     <item>SG</item>
     </string-array>
+    <string-array name="metal_types">
+        <item>Gold</item>
+        <item>Silver</item>
+    </string-array>
+    <string-array name="gold_jewel_types">
+        <item>Jewel 1</item>
+        <item>Jewel 2</item>
+        <item>Jewel 3</item>
+        <item>Jewel 4</item>
+        <item>Jewel 5</item>
+    </string-array>
+
+    <string-array name="silver_jewel_types">
+        <item>Jewel A</item>
+        <item>Jewel B</item>
+        <item>Jewel C</item>
+        <item>Jewel D</item>
+        <item>Jewel E</item>
+
+    </string-array>
+
 
 </resources>
