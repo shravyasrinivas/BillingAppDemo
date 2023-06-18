@@ -5,6 +5,7 @@ import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.FileProvider;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.ItemTouchHelper;
@@ -14,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.app.DatePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -40,6 +42,12 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -111,6 +119,7 @@ public class SalesFirstPage extends AppCompatActivity implements NavigationView.
             }
         });
 
+
         databaseReference = FirebaseDatabase.getInstance().getReference("Sales");
         list = new ArrayList<>();
 
@@ -137,18 +146,22 @@ public class SalesFirstPage extends AppCompatActivity implements NavigationView.
             }
         });
 
-        ItemTouchHelper.SimpleCallback simpleCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT) {
+        ItemTouchHelper.SimpleCallback simpleCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT | ItemTouchHelper.LEFT ) {
             @Override
             public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
                 return false;
             }
+        @Override
+        public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
+            int swipedPosition = viewHolder.getAdapterPosition();
+            UserHelperJava swipedUser = list.get(swipedPosition);
+            String swipedUserKey = swipedUser.getBillno();
 
-            @Override
-            public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
-                int swipedPosition = viewHolder.getAdapterPosition();
-                UserHelperJava swipedUser = list.get(swipedPosition);
-                String swipedUserKey = swipedUser.getBillno();
-
+            if (direction == ItemTouchHelper.LEFT) {
+                // Generate invoice based on swipedUserKey (bill number)
+                generateInvoice(swipedUserKey);
+            } else if (direction == ItemTouchHelper.RIGHT) {
+                // Delete the item
                 AlertDialog.Builder builder = new AlertDialog.Builder(SalesFirstPage.this);
                 builder.setTitle("Confirm Delete");
                 builder.setMessage("Are you sure you want to delete this item?");
@@ -186,11 +199,59 @@ public class SalesFirstPage extends AppCompatActivity implements NavigationView.
                 });
                 AlertDialog alertDialog = builder.create();
                 alertDialog.show();
-            }
+            }}
         };
-
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(simpleCallback);
         itemTouchHelper.attachToRecyclerView(recyclerView);
+
+//            @Override
+//            public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
+//                int swipedPosition = viewHolder.getAdapterPosition();
+//                UserHelperJava swipedUser = list.get(swipedPosition);
+//                String swipedUserKey = swipedUser.getBillno();
+//
+//                AlertDialog.Builder builder = new AlertDialog.Builder(SalesFirstPage.this);
+//                builder.setTitle("Confirm Delete");
+//                builder.setMessage("Are you sure you want to delete this item?");
+//                builder.setPositiveButton("Delete", new DialogInterface.OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface dialogInterface, int i) {
+//                        list.remove(swipedPosition);
+//                        adapter.notifyItemRemoved(swipedPosition);
+//
+//                        DatabaseReference swipedUserRef = databaseReference.child(swipedUserKey);
+//                        swipedUserRef.removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
+//                            @Override
+//                            public void onSuccess(Void aVoid) {
+//                                Toast.makeText(SalesFirstPage.this, "Item deleted successfully", Toast.LENGTH_SHORT).show();
+//                            }
+//                        }).addOnFailureListener(new OnFailureListener() {
+//                            @Override
+//                            public void onFailure(@NonNull Exception e) {
+//                                Toast.makeText(SalesFirstPage.this, "Failed to delete item: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+//                            }
+//                        });
+//                    }
+//                });
+//                builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface dialogInterface, int i) {
+//                        adapter.notifyItemChanged(swipedPosition);
+//                    }
+//                });
+//                builder.setOnCancelListener(new DialogInterface.OnCancelListener() {
+//                    @Override
+//                    public void onCancel(DialogInterface dialogInterface) {
+//                        adapter.notifyItemChanged(swipedPosition);
+//                    }
+//                });
+//                AlertDialog alertDialog = builder.create();
+//                alertDialog.show();
+//            }
+//        };
+//
+//        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(simpleCallback);
+//        itemTouchHelper.attachToRecyclerView(recyclerView);
 
         if (savedInstanceState == null) {
             //Intent homeIntent = new Intent(this, SalesFirstPage.class);
@@ -198,6 +259,60 @@ public class SalesFirstPage extends AppCompatActivity implements NavigationView.
             //getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new HomeFragment()).commit();
             navigationView.setCheckedItem(R.id.nav_home);
         }
+    }
+    private void generateInvoice(String billNumber) {
+        // Read the HTML template file
+        try {
+            InputStream inputStream = getAssets().open("Bill.html");
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+            StringBuilder stringBuilder = new StringBuilder();
+            String line;
+            while ((line = bufferedReader.readLine()) != null) {
+                stringBuilder.append(line);
+            }
+            bufferedReader.close();
+
+            // Replace the placeholders in the HTML template with the user details
+            String htmlTemplate = stringBuilder.toString();
+            UserHelperJava user = getUserDetails(billNumber);// Function to get user details based on bill number
+            String customerName = user.getName();
+//            String replacedHtml = htmlTemplate.replace("{{customerName}}", customerName);
+//            replacedHtml = replacedHtml.replace("{{billNumber}}", billNumber);
+            String replacedHtml = htmlTemplate.replace("[CUSTOMER_NAME]", user.getName());
+            replacedHtml = replacedHtml.replace("[BILL_NUMBER]", user.getBillno());
+            replacedHtml = replacedHtml.replace("[PLACE]", user.getPlace());
+            replacedHtml = replacedHtml.replace("[AMOUNT]", String.valueOf(user.getAmount()));
+            replacedHtml = replacedHtml.replace("[BALANCE]", String.valueOf(user.getBalance()));
+            replacedHtml = replacedHtml.replace("[DUE_DATE]", user.getDuedate());
+
+            // Save the replaced HTML content to a file
+            String invoiceFileName = "invoice_" + billNumber + ".html";
+            File invoiceFile = new File(getExternalFilesDir(null), invoiceFileName);
+            FileWriter fileWriter = new FileWriter(invoiceFile);
+            fileWriter.write(replacedHtml);
+            fileWriter.flush();
+            fileWriter.close();
+
+            // Open the invoice file with a web browser or any suitable application
+            Uri invoiceUri = FileProvider.getUriForFile(this, getPackageName() + ".fileprovider", invoiceFile);
+            Intent intent = new Intent(Intent.ACTION_VIEW);
+            intent.setDataAndType(invoiceUri, "text/html");
+            intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+            startActivity(Intent.createChooser(intent, "Open Invoice"));
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            Toast.makeText(this, "Failed to generate invoice: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+        }
+    }
+    private UserHelperJava getUserDetails(String billNumber) {
+        // Assuming you have a list of UserHelperJava objects called 'list' containing all the user details
+        for (UserHelperJava user : list) {
+            if (user.getBillno().equals(billNumber)) {
+                return user;
+            }
+        }
+        return null; // User details not found
     }
 
     @Override
