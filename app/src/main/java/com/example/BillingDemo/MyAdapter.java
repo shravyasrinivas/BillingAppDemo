@@ -100,7 +100,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> impl
                         "  </style>\n" +
                         "</head>\n" +
                         "<body>\n" +
-                        "<h1>SR AND SG JEWELLERY</h1>\n" +
+                        "<h1>SG AND SR JEWELLERY</h1>\n" +
                         "<table>\n" +
                         "<tr>\n" +
                         "        <th>Date</th>\n" +
