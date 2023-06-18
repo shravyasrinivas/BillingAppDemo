@@ -38,8 +38,8 @@
     <string name="sp_date">"Sales before "</string>
     <string name="filter_all">Sales of all customers</string>
     <string-array name="loan_types">
-    <item>SR</item>
-    <item>SG</item>
+        <item>SR</item>
+        <item>SG</item>
     </string-array>
     <string-array name="metal_types">
         <item>Gold</item>

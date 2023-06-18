@@ -131,7 +131,7 @@ public class LoanUpload extends AppCompatActivity {
 
 
                 if (!billno.isEmpty() && !name.isEmpty() && !place.isEmpty() && !amount.isEmpty() && !balance.isEmpty()) {
-                    UserHelperJava2 users = new UserHelperJava2(selectedDate, billno, name, place, amount, balance, duedate,loanType,metalType);
+                    UserHelperJava2 users = new UserHelperJava2(selectedDate, billno, name, place, amount, balance, duedate,loanType,metalType,jewelType);
                     db = FirebaseDatabase.getInstance();
 
                     reference = db.getReference("Loans");

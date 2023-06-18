@@ -11,6 +11,7 @@
         <entry key="..\:/Users/Shravya/AndroidStudioProjects/Medicologinsignup/app/src/main/res/drawable/ic_baseline_filter_list_24.xml" value="0.19166666666666668" />
         <entry key="..\:/Users/Shravya/AndroidStudioProjects/Medicologinsignup/app/src/main/res/drawable/ic_baseline_search_24.xml" value="0.18871794871794872" />
         <entry key="..\:/Users/Shravya/AndroidStudioProjects/Medicologinsignup/app/src/main/res/drawable/rounded_button.xml" value="0.18871794871794872" />
+        <entry key="..\:/Users/Shravya/AndroidStudioProjects/Medicologinsignup/app/src/main/res/layout/activity_invoice.xml" value="0.17552083333333332" />
         <entry key="..\:/Users/Shravya/AndroidStudioProjects/Medicologinsignup/app/src/main/res/layout/activity_loan_data_upload.xml" value="0.17552083333333332" />
         <entry key="..\:/Users/Shravya/AndroidStudioProjects/Medicologinsignup/app/src/main/res/layout/activity_loan_first_page.xml" value="0.10371376811594203" />
         <entry key="..\:/Users/Shravya/AndroidStudioProjects/Medicologinsignup/app/src/main/res/layout/activity_loan_report.xml" value="0.17552083333333332" />
@@ -25,6 +26,7 @@
         <entry key="..\:/Users/Shravya/AndroidStudioProjects/Medicologinsignup/app/src/main/res/layout/activity_sales_report.xml" value="0.17552083333333332" />
         <entry key="..\:/Users/Shravya/AndroidStudioProjects/Medicologinsignup/app/src/main/res/layout/activity_uploaddata.xml" value="0.16666666666666666" />
         <entry key="..\:/Users/Shravya/AndroidStudioProjects/Medicologinsignup/app/src/main/res/layout/app_update.xml" value="0.22" />
+        <entry key="..\:/Users/Shravya/AndroidStudioProjects/Medicologinsignup/app/src/main/res/layout/app_update_sales.xml" value="0.17552083333333332" />
         <entry key="..\:/Users/Shravya/AndroidStudioProjects/Medicologinsignup/app/src/main/res/layout/dropdown_action.xml" value="0.17552083333333332" />
         <entry key="..\:/Users/Shravya/AndroidStudioProjects/Medicologinsignup/app/src/main/res/layout/fragment_second.xml" value="0.17552083333333332" />
         <entry key="..\:/Users/Shravya/AndroidStudioProjects/Medicologinsignup/app/src/main/res/layout/nav_header.xml" value="0.17552083333333332" />
@@ -34,6 +36,7 @@
         <entry key="..\:/Users/Shravya/AndroidStudioProjects/Medicologinsignup/app/src/main/res/layout/sub_drawer3_header.xml" value="0.17552083333333332" />
         <entry key="..\:/Users/Shravya/AndroidStudioProjects/Medicologinsignup/app/src/main/res/layout/sub_drawer4_header.xml" value="0.17552083333333332" />
         <entry key="..\:/Users/Shravya/AndroidStudioProjects/Medicologinsignup/app/src/main/res/layout/userentry.xml" value="0.16666666666666666" />
+        <entry key="..\:/Users/Shravya/AndroidStudioProjects/Medicologinsignup/app/src/main/res/layout/userentry2.xml" value="0.17552083333333332" />
         <entry key="..\:/Users/Shravya/AndroidStudioProjects/Medicologinsignup/app/src/main/res/menu/drawer_menu.xml" value="0.17552083333333332" />
         <entry key="..\:/Users/Shravya/AndroidStudioProjects/Medicologinsignup/app/src/main/res/menu/menu.xml" value="0.16666666666666666" />
         <entry key="..\:/Users/Shravya/AndroidStudioProjects/Medicologinsignup/app/src/main/res/menu/nav_menu.xml" value="0.22" />

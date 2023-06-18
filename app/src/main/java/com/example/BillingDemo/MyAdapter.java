@@ -2,12 +2,11 @@ package com.example.BillingDemo;
 
 
 
-import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.util.Log;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,7 +33,6 @@ import com.google.firebase.database.ValueEventListener;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.Locale;
 
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> implements Filterable {
@@ -69,6 +67,79 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> impl
         holder.name.setText(user.getName());
         holder.billno.setText(user.getBillno());
 
+        holder.invoiceButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                UserHelperJava user = list.get(holder.getAdapterPosition());
+                String htmlTemplate = "<!DOCTYPE html>\n" +
+                        "<html>\n" +
+                        "<head>\n" +
+                        "    <title>Invoice</title>\n" +
+                        "    <style>\n" +
+                        "    body {\n" +
+                        "      font-family: Arial, sans-serif;\n" +
+                        "      margin: 0;\n" +
+                        "      padding: 20px;\n" +
+                        "    }\n" +
+                        "    h1 {\n" +
+                        "      text-align: center;\n" +
+                        "    }\n" +
+                        "    table {\n" +
+                        "      width: 100%;\n" +
+                        "      border-collapse: collapse;\n" +
+                        "      margin-top: 20px;\n" +
+                        "    }\n" +
+                        "    th, td {\n" +
+                        "      padding: 8px;\n" +
+                        "      text-align: left;\n" +
+                        "      border-bottom: 1px solid #ddd;\n" +
+                        "    }\n" +
+                        "    th {\n" +
+                        "      background-color: #f2f2f2;\n" +
+                        "    }\n" +
+                        "  </style>\n" +
+                        "</head>\n" +
+                        "<body>\n" +
+                        "<h1>SR AND SG JEWELLERY</h1>\n" +
+                        "<table>\n" +
+                        "<tr>\n" +
+                        "        <th>Date</th>\n" +
+                        "        <td>" + user.getDate() + "</td>\n" +
+                        "    </tr>\n" +
+                        "    <tr>\n" +
+                        "        <th>Customer Name</th>\n" +
+                        "        <td>" + user.getName() + "</td>\n" +
+                        "    </tr>\n" +
+                        "    <tr>\n" +
+                        "        <th>Bill No</th>\n" +
+                        "        <td>" + user.getBillno() + "</td>\n" +
+                        "    </tr>\n" +
+                        "    <tr>\n" +
+                        "        <th>Place</th>\n" +
+                        "        <td>" + user.getPlace() + "</td>\n" +
+                        "    </tr>\n" +
+                        "    <tr>\n" +
+                        "        <th>Amount</th>\n" +
+                        "        <td>" + user.getAmount() + "</td>\n" +
+                        "    </tr>\n" +
+                        "    <tr>\n" +
+                        "        <th>Balance</th>\n" +
+                        "        <td>" + user.getBalance() + "</td>\n" +
+                        "    </tr>\n" +
+                        "    <tr>\n" +
+                        "        <th>Approx Due Date</th>\n" +
+                        "        <td>" + user.getDuedate() + "</td>\n" +
+                        "    </tr>\n" +
+                        "</table>\n" +
+                        "</body>\n" +
+                        "</html>";
+
+                Intent intent = new Intent(context, InvoiceActivity.class);
+                intent.putExtra("htmlTemplate", htmlTemplate);
+                context.startActivity(intent);
+            }
+        });
+
 
 
         String balance = user.getBalance();
@@ -88,7 +159,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> impl
 
         Dialog dialog = new Dialog(context);
         databaseReference = FirebaseDatabase.getInstance().getReference("Sales");
-        dialog.setContentView(R.layout.app_update);
+        dialog.setContentView(R.layout.app_update_sales);
         EditText edtName = dialog.findViewById(R.id.editName);
         EditText edtBillNumber = dialog.findViewById(R.id.editBillNum);
         EditText edtPlace = dialog.findViewById(R.id.editPlace);
@@ -243,6 +314,8 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> impl
         TextView name,billno,date,balanceTextView,daysPending,duedate;
         LinearLayout llrow;
         ImageView tagImageView;
+        ArrayList<UserHelperJava> list;
+        Button invoiceButton;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             name=itemView.findViewById(R.id.textName);
@@ -253,12 +326,13 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> impl
 //            balanceTextView=itemView.findViewById(R.id.balanceTextView);
             tagImageView=itemView.findViewById(R.id.tagImageView);
             daysPending = itemView.findViewById(R.id.daysPending);
-
-
-        }
-    }
-
-}
+            invoiceButton = itemView.findViewById(R.id.invoiceButton);
+    }}}
+//
+//        }
+//    }
+//
+//}
 
 
 

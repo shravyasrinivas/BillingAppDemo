@@ -146,7 +146,7 @@ public class SalesFirstPage extends AppCompatActivity implements NavigationView.
             }
         });
 
-        ItemTouchHelper.SimpleCallback simpleCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT | ItemTouchHelper.LEFT ) {
+        ItemTouchHelper.SimpleCallback simpleCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT  ) {
             @Override
             public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
                 return false;
@@ -156,11 +156,11 @@ public class SalesFirstPage extends AppCompatActivity implements NavigationView.
             int swipedPosition = viewHolder.getAdapterPosition();
             UserHelperJava swipedUser = list.get(swipedPosition);
             String swipedUserKey = swipedUser.getBillno();
-
-            if (direction == ItemTouchHelper.LEFT) {
-                // Generate invoice based on swipedUserKey (bill number)
-                generateInvoice(swipedUserKey);
-            } else if (direction == ItemTouchHelper.RIGHT) {
+//
+//            if (direction == ItemTouchHelper.LEFT) {
+//                // Generate invoice based on swipedUserKey (bill number)
+//                generateInvoice(swipedUserKey);}
+            if (direction == ItemTouchHelper.RIGHT) {
                 // Delete the item
                 AlertDialog.Builder builder = new AlertDialog.Builder(SalesFirstPage.this);
                 builder.setTitle("Confirm Delete");
@@ -259,60 +259,6 @@ public class SalesFirstPage extends AppCompatActivity implements NavigationView.
             //getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new HomeFragment()).commit();
             navigationView.setCheckedItem(R.id.nav_home);
         }
-    }
-    private void generateInvoice(String billNumber) {
-        // Read the HTML template file
-        try {
-            InputStream inputStream = getAssets().open("Bill.html");
-            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
-            StringBuilder stringBuilder = new StringBuilder();
-            String line;
-            while ((line = bufferedReader.readLine()) != null) {
-                stringBuilder.append(line);
-            }
-            bufferedReader.close();
-
-            // Replace the placeholders in the HTML template with the user details
-            String htmlTemplate = stringBuilder.toString();
-            UserHelperJava user = getUserDetails(billNumber);// Function to get user details based on bill number
-            String customerName = user.getName();
-//            String replacedHtml = htmlTemplate.replace("{{customerName}}", customerName);
-//            replacedHtml = replacedHtml.replace("{{billNumber}}", billNumber);
-            String replacedHtml = htmlTemplate.replace("[CUSTOMER_NAME]", user.getName());
-            replacedHtml = replacedHtml.replace("[BILL_NUMBER]", user.getBillno());
-            replacedHtml = replacedHtml.replace("[PLACE]", user.getPlace());
-            replacedHtml = replacedHtml.replace("[AMOUNT]", String.valueOf(user.getAmount()));
-            replacedHtml = replacedHtml.replace("[BALANCE]", String.valueOf(user.getBalance()));
-            replacedHtml = replacedHtml.replace("[DUE_DATE]", user.getDuedate());
-
-            // Save the replaced HTML content to a file
-            String invoiceFileName = "invoice_" + billNumber + ".html";
-            File invoiceFile = new File(getExternalFilesDir(null), invoiceFileName);
-            FileWriter fileWriter = new FileWriter(invoiceFile);
-            fileWriter.write(replacedHtml);
-            fileWriter.flush();
-            fileWriter.close();
-
-            // Open the invoice file with a web browser or any suitable application
-            Uri invoiceUri = FileProvider.getUriForFile(this, getPackageName() + ".fileprovider", invoiceFile);
-            Intent intent = new Intent(Intent.ACTION_VIEW);
-            intent.setDataAndType(invoiceUri, "text/html");
-            intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-            startActivity(Intent.createChooser(intent, "Open Invoice"));
-
-        } catch (IOException e) {
-            e.printStackTrace();
-            Toast.makeText(this, "Failed to generate invoice: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-        }
-    }
-    private UserHelperJava getUserDetails(String billNumber) {
-        // Assuming you have a list of UserHelperJava objects called 'list' containing all the user details
-        for (UserHelperJava user : list) {
-            if (user.getBillno().equals(billNumber)) {
-                return user;
-            }
-        }
-        return null; // User details not found
     }
 
     @Override
