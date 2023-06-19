@@ -2,11 +2,14 @@ package com.example.BillingDemo;
 
 
 
+import android.Manifest;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.telephony.SmsManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +23,10 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -30,10 +37,13 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Locale;
+import java.util.concurrent.TimeUnit;
 
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> implements Filterable {
     Context context;
@@ -41,6 +51,10 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> impl
     ArrayList<UserHelperJava> listfull;
     DatabaseReference databaseReference;
     //private int[] tagIcons = {R.drawable.ic_baseline_done_24, R.drawable.ic_baseline_close_24};
+
+    private static final long CHECK_INTERVAL = TimeUnit.DAYS.toMillis(1); // Interval to check daysPending (1 day)
+    private static final int PERMISSION_REQUEST_SMS = 123;
+
 
     public MyAdapter(Context context, ArrayList<UserHelperJava> list) {
         this.context = context;
@@ -55,12 +69,36 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> impl
     }
 
 
-    @NonNull
+        @NonNull
     @Override
     public MyAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v= LayoutInflater.from(context).inflate(R.layout.userentry, parent,false);
         return new MyViewHolder(v);
     }
+
+//    private void requestSmsPermission() {
+//        if (ContextCompat.checkSelfPermission(this, Manifest.permission.SEND_SMS) != PackageManager.PERMISSION_GRANTED) {
+//            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.SEND_SMS}, PERMISSION_REQUEST_SMS);
+//        } else {
+//            // Permission already granted, you can now send SMS
+//            // Call the method to send SMS from your adapter here
+//        }
+//    }
+//
+//    @Override
+//    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+//        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+//
+//        if (requestCode == PERMISSION_REQUEST_SMS) {
+//            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+//                // Permission granted, you can now send SMS
+//            } else {
+//                // Permission denied, handle accordingly
+//            }
+//        }
+//    }
+
+
     @Override
     public void onBindViewHolder(@NonNull MyAdapter.MyViewHolder holder, int position) {
         UserHelperJava user = list.get(holder.getAdapterPosition());
@@ -154,7 +192,6 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> impl
         });
 
 
-
         String balance = user.getBalance();
         int tagIconResId = balance.equals("0") ? R.drawable.ic_baseline_check_circle_outline_24 : R.drawable.ic_baseline_cancel_24;
         holder.tagImageView.setImageResource(tagIconResId);
@@ -167,7 +204,6 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> impl
         } else {
             holder.daysPending.setVisibility(View.GONE);
         }
-
 
 
         Dialog dialog = new Dialog(context);
@@ -184,7 +220,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> impl
 
         Button btnAction = dialog.findViewById(R.id.btnAction);
         TextView edtDate = dialog.findViewById(R.id.editDate);
-        TextView edtDueDate=dialog.findViewById(R.id.editdueDate);
+        TextView edtDueDate = dialog.findViewById(R.id.editdueDate);
         edtName.setText(user.getName());
         edtFatherName.setText(user.getFatherName());
         edtAadharNum.setText(user.getAadharNum());
@@ -239,15 +275,23 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> impl
                     return;
                 }
 
-                UserHelperJava updatedUser = new UserHelperJava(date, billno, name,fatherName,aadharNum,phoneNum, place, amount, balance,duedate);
+                UserHelperJava updatedUser = new UserHelperJava(date, billno, name, fatherName, aadharNum, phoneNum, place, amount, balance, duedate);
                 list.set(holder.getAdapterPosition(), updatedUser);
                 notifyItemChanged(holder.getAdapterPosition());
 
                 userRef.setValue(updatedUser);
 
                 dialog.dismiss();
+                int daysPending = updatedUser.getDaysPending();
+                if (daysPending == 1) {
+                    String smsMessage = "Dear " + updatedUser.getName() + ", this is a reminder from SG and SR Jewellery. Please note that you have a balance amount of " + updatedUser.getBalance() + " pending. Kindly clear the payment as soon as possible.Your due date is "+ updatedUser.getDuedate() + "Thank you!";
+                    sendSms(updatedUser.getPhoneNum(), smsMessage);
+                }
             }
         });
+
+
+
 
         dialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
             @Override
@@ -352,7 +396,21 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> impl
             tagImageView=itemView.findViewById(R.id.tagImageView);
             daysPending = itemView.findViewById(R.id.daysPending);
             invoiceButton = itemView.findViewById(R.id.invoiceButton);
-    }}}
+    }}
+
+
+    private void sendSms(String phoneNum, String message) {
+        try {
+            SmsManager smsManager = SmsManager.getDefault();
+            smsManager.sendTextMessage(phoneNum, null, message, null, null);
+            Toast.makeText(context, "SMS notification sent", Toast.LENGTH_SHORT).show();
+        } catch (Exception e) {
+            Toast.makeText(context, "Failed to send SMS notification", Toast.LENGTH_SHORT).show();
+            e.printStackTrace();
+        }
+    }
+
+}
 //
 //        }
 //    }
@@ -361,3 +419,14 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> impl
 
 
 
+//    @Override
+//    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+//        if (requestCode == PERMISSION_REQUEST_SMS) {
+//            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+//                // Permission granted, you can now send SMS
+//            } else {
+//                // Permission denied, handle accordingly
+//            }
+//        }
+//        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+//

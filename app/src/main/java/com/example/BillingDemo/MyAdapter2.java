@@ -246,7 +246,9 @@ public class MyAdapter2 extends RecyclerView.Adapter<MyAdapter2.MyViewHolder> im
                                     public void onSuccess(Void aVoid) {
                                         Toast.makeText(context, "Data updated successfully", Toast.LENGTH_SHORT).show();
                                         dialog.dismiss();
+
                                     }
+
                                 })
                                 .addOnFailureListener(new OnFailureListener() {
                                     @Override

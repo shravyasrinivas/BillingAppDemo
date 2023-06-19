@@ -160,7 +160,7 @@ public class UserHelperJava2 {
                 Date dueDate = dateFormat.parse(duedate);
                 long diffInMilliseconds = dueDate.getTime() - currentDate.getTime();
                 long diffInDays = TimeUnit.MILLISECONDS.toDays(diffInMilliseconds);
-                return (int) diffInDays;
+                return (int) diffInDays+1;
             } catch (Exception e) {
                 e.printStackTrace();
             }

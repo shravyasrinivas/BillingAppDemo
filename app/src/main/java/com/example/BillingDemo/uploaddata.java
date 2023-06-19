@@ -1,11 +1,17 @@
 package com.example.BillingDemo;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
+import android.Manifest;
+import android.content.pm.PackageManager;
 import android.telephony.SmsManager;
 import android.app.DatePickerDialog;
 import android.content.Intent;
@@ -13,6 +19,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.Toast;
+
 import com.example.BillingDemo.databinding.ActivityUploaddataBinding;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -23,12 +30,13 @@ import com.google.firebase.database.FirebaseDatabase;
 public class uploaddata extends AppCompatActivity {
 
     ActivityUploaddataBinding binding;
-    String billno, name, place, amount, balance, selectedDate, duedate,fatherName,aadharNum,phoneNum;
+    String billno, name, place, amount, balance, selectedDate, duedate, fatherName, aadharNum, phoneNum;
 
     FirebaseDatabase db;
     DatabaseReference reference;
 
     private static final long CHECK_INTERVAL = TimeUnit.DAYS.toMillis(1); // Interval to check daysPending (1 day)
+    private static final int PERMISSION_REQUEST_SMS = 123;
 
     @Override
     public void onBackPressed() {
@@ -43,6 +51,18 @@ public class uploaddata extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityUploaddataBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.SEND_SMS) != PackageManager.PERMISSION_GRANTED) {
+            // Request the permission
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.SEND_SMS}, PERMISSION_REQUEST_SMS);
+        } else {
+            // Permission already granted, you can now send SMS
+        }
+
+
+    // Handle the permission request result
+
+
         binding.Date.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -97,8 +117,8 @@ public class uploaddata extends AppCompatActivity {
 
 
                             Toast.makeText(uploaddata.this, "Successfully Uploaded", Toast.LENGTH_SHORT).show();
-
-                        }
+                            scheduleNotification();
+                             }
 
                     });
                 }
@@ -106,6 +126,38 @@ public class uploaddata extends AppCompatActivity {
         });
 
     }
+
+    private void scheduleNotification() {
+        // Parse the selected due date
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        try {
+            Date dueDate = dateFormat.parse(duedate);
+            Date currentDate = new Date();
+
+            // Calculate the difference between current date and due date in days
+            long differenceInDays = TimeUnit.DAYS.convert(dueDate.getTime() - currentDate.getTime(), TimeUnit.MILLISECONDS);
+
+            // Check if the difference is equal to 1 day
+            if (differenceInDays == 0) {
+                // Send notification with the balance amount to the customer's phone number
+                sendNotification(phoneNum, "Dear " + name + ", this is a reminder from SG and SR Jewellery. Please note that you have a balance amount of " + balance + " pending. Kindly clear the payment as soon as possible.Your due date is "+ duedate + "Thank you!");
+            }
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void sendNotification(String phoneNumber, String message) {
+        try {
+            SmsManager smsManager = SmsManager.getDefault();
+            smsManager.sendTextMessage(phoneNumber, null, message, null, null);
+            Toast.makeText(uploaddata.this, "SMS notification sent", Toast.LENGTH_SHORT).show();
+        } catch (Exception e) {
+            Toast.makeText(uploaddata.this, "Failed to send SMS notification", Toast.LENGTH_SHORT).show();
+            e.printStackTrace();
+        }
+    }
+
     public void showDatePicker() {
         // Create a dialog for selecting the date
         DatePickerDialog datePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
