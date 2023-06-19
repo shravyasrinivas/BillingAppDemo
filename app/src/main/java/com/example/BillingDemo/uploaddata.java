@@ -147,10 +147,10 @@ public class uploaddata extends AppCompatActivity {
         }
     }
 
-    private void sendNotification(String phoneNumber, String message) {
+    private void sendNotification(String phoneNum, String message) {
         try {
             SmsManager smsManager = SmsManager.getDefault();
-            smsManager.sendTextMessage(phoneNumber, null, message, null, null);
+            smsManager.sendTextMessage(phoneNum, null, message, null, null);
             Toast.makeText(uploaddata.this, "SMS notification sent", Toast.LENGTH_SHORT).show();
         } catch (Exception e) {
             Toast.makeText(uploaddata.this, "Failed to send SMS notification", Toast.LENGTH_SHORT).show();
