@@ -13,10 +13,6 @@ import android.widget.ListView;
 import androidx.appcompat.widget.SearchView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
-
-import java.util.ArrayList;
-import java.util.Map;
 
 public class SalesPage extends AppCompatActivity {
     ListView listView;
@@ -39,7 +35,7 @@ public class SalesPage extends AppCompatActivity {
             public void onClick(View view) {
                     //Snackbar.make(view, "Pick your file", Snackbar.LENGTH_LONG)
                        //     .setAction("Action", null).show();
-                Intent intent=new Intent(getApplicationContext(),uploaddata.class);
+                Intent intent=new Intent(getApplicationContext(), UploadData.class);
                 startActivity(intent);
                 finish();
                 }
