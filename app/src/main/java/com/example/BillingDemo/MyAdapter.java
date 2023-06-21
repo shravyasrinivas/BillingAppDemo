@@ -50,6 +50,8 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> impl
     ArrayList<UserHelperJava> list;
     ArrayList<UserHelperJava> listfull;
     DatabaseReference databaseReference;
+    UploadData uploadData;
+    //String name1,balance1,dueDate1,phoneNum1;
     //private int[] tagIcons = {R.drawable.ic_baseline_done_24, R.drawable.ic_baseline_close_24};
 
     private static final long CHECK_INTERVAL = TimeUnit.DAYS.toMillis(1); // Interval to check daysPending (1 day)
@@ -206,6 +208,8 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> impl
         }
 
 
+
+
         Dialog dialog = new Dialog(context);
         databaseReference = FirebaseDatabase.getInstance().getReference("Sales");
         dialog.setContentView(R.layout.app_update_sales);
@@ -231,6 +235,12 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> impl
         edtBal.setText(user.getBalance());
         edtDate.setText(user.getDate());
         edtDueDate.setText(user.getDuedate());
+
+//        phoneNum1 = edtPhoneNum.getText().toString();
+//        name1 = edtName.getText().toString();
+//        balance1 = edtBal.getText().toString();
+//        dueDate1 = edtDueDate.getText().toString();
+
         DatabaseReference userRef = databaseReference.child(user.getBillno());
         ValueEventListener valueEventListener = new ValueEventListener() {
             @Override
@@ -254,7 +264,14 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> impl
             public void onCancelled(@NonNull DatabaseError error) {
                 Toast.makeText(context, "Database error: " + error.getMessage(), Toast.LENGTH_SHORT).show();
             }
+
         };
+//        if (daysPending==1){
+//            uploadData.sendReminderSMS(phoneNum1,name1,balance1,dueDate1);
+//
+//        }
+
+
         userRef.addValueEventListener(valueEventListener);
         btnAction.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -282,11 +299,11 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> impl
                 userRef.setValue(updatedUser);
 
                 dialog.dismiss();
-                int daysPending = updatedUser.getDaysPending();
-                if (daysPending == 1) {
-                    String smsMessage = "Dear " + updatedUser.getName() + ", this is a reminder from SG and SR Jewellery. Please note that you have a balance amount of " + updatedUser.getBalance() + " pending. Kindly clear the payment as soon as possible.Your due date is "+ updatedUser.getDuedate() + "Thank you!";
-                    sendSms(updatedUser.getPhoneNum(), smsMessage);
-                }
+//                int daysPending = updatedUser.getDaysPending();
+//                if (daysPending == 1) {
+//                    String smsMessage = "Dear " + updatedUser.getName() + ", this is a reminder from SG and SR Jewellery. Please note that you have a balance amount of " + updatedUser.getBalance() + " pending. Kindly clear the payment as soon as possible.Your due date is "+ updatedUser.getDuedate() + "Thank you!";
+//                    sendSms(updatedUser.getPhoneNum(), smsMessage);
+//                }
             }
         });
 
@@ -397,25 +414,19 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> impl
             daysPending = itemView.findViewById(R.id.daysPending);
             invoiceButton = itemView.findViewById(R.id.invoiceButton);
     }}
-
-
-    private void sendSms(String phoneNum, String message) {
-        try {
-            SmsManager smsManager = SmsManager.getDefault();
-            smsManager.sendTextMessage(phoneNum, null, message, null, null);
-            Toast.makeText(context, "SMS notification sent", Toast.LENGTH_SHORT).show();
-        } catch (Exception e) {
-            Toast.makeText(context, "Failed to send SMS notification", Toast.LENGTH_SHORT).show();
-            e.printStackTrace();
-        }
-    }
-
 }
 //
+//    private void sendSms(String phoneNum, String message) {
+//        try {
+//            SmsManager smsManager = SmsManager.getDefault();
+//            smsManager.sendTextMessage(phoneNum, null, message, null, null);
+//            Toast.makeText(context, "SMS notification sent", Toast.LENGTH_SHORT).show();
+//        } catch (Exception e) {
+//            Toast.makeText(context, "Failed to send SMS notification", Toast.LENGTH_SHORT).show();
+//            e.printStackTrace();
 //        }
 //    }
-//
-//}
+
 
 
 

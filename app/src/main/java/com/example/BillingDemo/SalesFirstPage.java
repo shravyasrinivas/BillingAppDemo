@@ -427,7 +427,10 @@ public class SalesFirstPage extends AppCompatActivity implements NavigationView.
                 break;
 
             case R.id.nav_reminder:
+                startActivity(new Intent(SalesFirstPage.this, Reminder.class));
+                drawerLayout.closeDrawer(GravityCompat.START);
                 Toast.makeText(this, "Reminder!", Toast.LENGTH_SHORT).show();
+
                 //getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new SettingsFragment()).commit();
                 break;
 
