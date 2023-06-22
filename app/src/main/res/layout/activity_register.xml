@@ -53,7 +53,7 @@
         android:text="@string/register"
         android:textColor="@color/black"
         android:textSize="20sp"
-        app:backgroundTint="@color/teal_200"
+        app:backgroundTint="#8692F7"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
     <TextView
